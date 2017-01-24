@@ -1,0 +1,27 @@
+backerymails:
+  path: '/admin/config/backerymails'
+  defaults:
+    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+    _title: 'Backery Mails'
+  requirements:
+    _permission: 'administer backerymails'
+
+backerymails.settings:
+  path: '/admin/config/backerymails/settings'
+  defaults:
+    _form: '\Drupal\backerymails\Form\SettingsForm'
+    _title: 'Settings'
+  requirements:
+    _permission: 'administer backerymails'
+
+# Route name can be used in several places; e.g. links, redirects, and local
+# actions.
+entity.backerymails.canonical:
+  path: '/admin/config/backerymails/mails/{backerymails_entity}'
+  defaults:
+    # Calls the view controller, defined in the annotation of the contact entity
+    _entity_view: 'backerymails'
+    _title: 'Mail Content'
+  requirements:
+    # Calls the access controller of the entity, $operation 'view'
+    _entity_access: 'backerymails.view'

@@ -1,0 +1,12 @@
+backerymails.config:
+  title: 'Backery Mails'
+  route_name: backerymails
+  description: 'Configure Backery Mails.'
+  parent: system.admin_config_system
+
+backerymails.settings:
+  title: 'Settings'
+  route_name: backerymails.settings
+  description: 'Configure how Backery Mails will save e-mails.'
+  parent: backerymails.config
+  weight: 100
