@@ -1,2 +1,5 @@
-2016-23-12
-  - First draft.
+CHANGELOG
+---------
+
+## 0.0.1 (2017-01-24)
+ - First draft.
