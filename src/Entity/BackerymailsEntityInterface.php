@@ -10,9 +10,7 @@ use Drupal\Core\Entity\EntityChangedInterface;
  *
  * @ingroup backerymails
  */
-interface BackerymailsEntityInterface extends  ContentEntityInterface, EntityChangedInterface {
-
-  // Add get/set methods for your configuration properties here.
+interface BackerymailsEntityInterface extends ContentEntityInterface, EntityChangedInterface {
 
   /**
    * Gets the Backerymails entity creation timestamp.
@@ -32,4 +30,5 @@ interface BackerymailsEntityInterface extends  ContentEntityInterface, EntityCha
    *   The called Backerymails entity entity.
    */
   public function setCreatedTime($timestamp);
+
 }

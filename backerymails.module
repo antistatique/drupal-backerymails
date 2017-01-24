@@ -1,3 +1,8 @@
 <?php
 
-require_once('inc/hooks.php');
+/**
+ * @file
+ * Legacy Drupal 7 code to implements hooks and includes.
+ */
+
+require_once 'inc/hooks.php';

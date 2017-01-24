@@ -8,6 +8,5 @@ core: 8.x
 dependencies:
   - views
   - mailsystem
-  - swiftmailer
 
 configure: backerymails.settings

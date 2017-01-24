@@ -20,14 +20,15 @@ class BackerymailsEntityAccessControlHandler extends EntityAccessControlHandler 
   protected function checkAccess(EntityInterface $entity, $operation, AccountInterface $account) {
     /** @var \Drupal\backerymails\Entity\BackerymailsEntityInterface $entity */
     switch ($operation) {
-        case 'view':
-          return AccessResult::allowedIfHasPermission($account, 'administer backerymails');
+      case 'view':
+        return AccessResult::allowedIfHasPermission($account, 'administer backerymails');
 
-        case 'delete':
-          return AccessResult::allowedIfHasPermission($account, 'administer backerymails');
+      case 'delete':
+        return AccessResult::allowedIfHasPermission($account, 'administer backerymails');
     }
 
     // Unknown operation, no opinion.
     return AccessResult::neutral();
   }
+
 }
