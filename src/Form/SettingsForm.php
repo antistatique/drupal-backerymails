@@ -48,7 +48,7 @@ class SettingsForm extends ConfigFormBase {
 
     $form['settings']['exclude_user_login_mails'] = array(
       '#type' => 'checkbox',
-      '#title' => $this->t('Exclude senstive e-mails.'),
+      '#title' => $this->t('Exclude sensitives e-mails.'),
       '#default_value' => $config->get('excluded')['exclude_user_login_mails'],
       '#description' => $this->t('Drupal send sensitives e-mails to user account such "forgotten password". Enabling this setting will result in excluding all sensitives e-mails to be saved.'),
     );
