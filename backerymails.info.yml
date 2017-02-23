@@ -5,7 +5,7 @@ type: module
 core: 8.x
 
 dependencies:
-  - views
-  - mailsystem
+  - drupal:views
+  - drupal:mailsystem
 
 configure: backerymails.settings
