@@ -6,3 +6,35 @@
  */
 
 require_once 'inc/hooks.php';
+
+/**
+ * Implements hook_help().
+ *
+ * @inheritdoc
+ */
+function backerymails_help($route_name, \Drupal\Core\Routing\RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.backerymails':
+      $text = file_get_contents(dirname(__FILE__) . "/README.md");
+      if (! \Drupal::moduleHandler()->moduleExists('markdown')) {
+        return '<pre>' . $text . '</pre>';
+      }
+      else {
+        // Use the Markdown filter to render the README.
+        $filter_manager = \Drupal::service('plugin.manager.filter');
+        $settings = \Drupal::configFactory()->get('markdown.settings')->getRawData();
+        $config = array('settings' => $settings);
+        $filter = $filter_manager->createInstance('markdown', $config);
+        return $filter->process($text, 'en');
+      }
+  }
+  return NULL;
+}
+
+/**
+* Implements hook_install().
+*/
+function backerymails_install() {
+  $url = \Drupal\Core\Url::fromRoute('backerymails.settings');
+  drupal_set_message(t('Backery Mails settings are available under <a href="@administer-page">Administer > Site configuration > Backery Mails</a>', array('@administer-page' => $url->toString())));
+}
