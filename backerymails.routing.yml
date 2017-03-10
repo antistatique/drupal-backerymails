@@ -6,6 +6,11 @@ backerymails:
   requirements:
     _permission: 'administer backerymails'
 
+# Collection page.
+# Managed by a views
+entity.backerymails.collection:
+  path: '/admin/config/backerymails/mails'
+
 backerymails.settings:
   path: '/admin/config/backerymails/settings'
   defaults:
@@ -14,8 +19,7 @@ backerymails.settings:
   requirements:
     _permission: 'administer backerymails'
 
-# Route name can be used in several places; e.g. links, redirects, and local
-# actions.
+# detail
 entity.backerymails.canonical:
   path: '/admin/config/backerymails/mails/{backerymails_entity}'
   defaults:
@@ -25,3 +29,12 @@ entity.backerymails.canonical:
   requirements:
     # Calls the access controller of the entity, $operation 'view'
     _entity_access: 'backerymails.view'
+
+# clear all
+entity.backerymails.clear:
+  path: '/admin/config/backerymails/clear'
+  defaults:
+    _form: '\Drupal\backerymails\Form\ClearForm'
+    _title: 'Clear'
+  requirements:
+    _permission: 'administer backerymails'

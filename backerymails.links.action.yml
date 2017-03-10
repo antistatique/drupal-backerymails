@@ -1,0 +1,5 @@
+entity.backerymails.clear:
+  route_name: entity.backerymails.clear
+  title: 'Delete All'
+  appears_on:
+    - entity.backerymails.collection
