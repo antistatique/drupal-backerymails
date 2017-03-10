@@ -53,6 +53,12 @@ class SettingsForm extends ConfigFormBase {
       '#description' => $this->t('Drupal send sensitives e-mails to user account such "forgotten password". Enabling this setting will result in excluding all sensitives e-mails to be saved.'),
     );
 
+    $form['settings']['verbose'] = array(
+      '#type' => 'checkbox',
+      '#title' => $this->t("Display the e-mails on page."),
+      '#default_value' => $config->get('verbose'),
+      '#description' => $this->t('If enabled, anonymous users with permissions will see any verbose output mail.'),
+    );
 
     $form['reroute'] = array(
       '#type' => 'fieldset',
@@ -125,6 +131,14 @@ class SettingsForm extends ConfigFormBase {
         }
     }
 
+    if ($form_state->hasValue('settings')) {
+        $config->set('verbose', $form_state->getValue('settings')['verbose']);
+        $config->save();
+
+        if ($form_state->getValue('settings')['verbose']) {
+          drupal_set_message($this->t('Drupal has been configured to display all outgoing e-mails.'), 'status');
+        }
+    }
   }
 
 }

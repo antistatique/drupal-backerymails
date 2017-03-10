@@ -43,6 +43,21 @@ function backerymails_mail_alter(&$message) {
     $message['to'] = $to;
   }
 
+  // Display the e-mail if the verbose is enabled.
+  if ($config->get('verbose') && \Drupal::currentUser()->hasPermission('administer site configuration')) {
+    // Print the message.
+    $header_output = print_r($message['headers'], TRUE);
+    $output = t('A mail has been sent: <br/> [Subject] => @subject <br/> [From] => @from <br/> [To] => @to <br/> [Reply-To] => @reply <br/> <pre>  [Header] => @header <br/> [Body] => @body </pre>', [
+        '@subject' => $subject,
+        '@from' => $message['from'],
+        '@to' => $message['to'],
+        '@reply' => isset($message['reply_to']) ? $message['reply_to'] : NULL,
+        '@header' => $header_output,
+        '@body' => $body
+    ]);
+    drupal_set_message($output, 'status', TRUE);
+  }
+
   $data = array(
     'module'        => $message['module'],
     'module_key'    => $message['key'],
