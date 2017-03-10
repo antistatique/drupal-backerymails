@@ -46,13 +46,6 @@ class SettingsForm extends ConfigFormBase {
       '#title' => $this->t('General'),
     );
 
-    $form['settings']['exclude_user_login_mails'] = array(
-      '#type' => 'checkbox',
-      '#title' => $this->t('Exclude sensitives e-mails.'),
-      '#default_value' => $config->get('excluded')['exclude_user_login_mails'],
-      '#description' => $this->t('Drupal send sensitives e-mails to user account such "forgotten password". Enabling this setting will result in excluding all sensitives e-mails to be saved.'),
-    );
-
     $form['settings']['verbose'] = array(
       '#type' => 'checkbox',
       '#title' => $this->t("Display the e-mails on page."),
@@ -60,9 +53,30 @@ class SettingsForm extends ConfigFormBase {
       '#description' => $this->t('If enabled, anonymous users with permissions will see any verbose output mail.'),
     );
 
+    $form['excludes'] = array(
+      '#type' => 'fieldset',
+      '#title' => $this->t('Exclude(s)'),
+    );
+
+    $form['excludes']['sensitives'] = array(
+      '#type' => 'checkbox',
+      '#title' => $this->t('Exclude sensitives e-mails.'),
+      '#default_value' => !empty($config->get('excludes')['sensitives']),
+      '#description' => $this->t('Drupal send sensitives e-mails to user account such "forgotten password". Enabling this setting will result in excluding all sensitives e-mails to be saved.'),
+    );
+
+    $form['excludes']['customs'] = array(
+      '#type'          => 'textarea',
+      '#title'         => $this->t('Exclude(s)'),
+      '#default_value' => implode("\r\n", $config->get('excludes')['customs']),
+      '#description'   => $this->t('Specify customs "module.key" to exclude. Enter one "module.key" per line. An example is "update.status_notify" for every update core mails.'),
+      '#placeholder'   => 'update.status_notify',
+    );
+
     $form['reroute'] = array(
       '#type' => 'fieldset',
       '#title' => $this->t('Rerouting'),
+      '#description' => $this->t('When enabled, the choosen recipient(s) will override original recipient(s).'),
     );
 
     $form['reroute']['status'] = array(
@@ -101,15 +115,18 @@ class SettingsForm extends ConfigFormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $config = $this->config('backerymails.settings');
 
-    // Save it as array for futur-proof.
-    $excluded = $config->get('excluded', array());
-
-    if ($form_state->hasValue('settings', 'exclude_user_login_mails')) {
-      $excluded['exclude_user_login_mails'] = $form_state->getValue('settings', 'exclude_user_login_mails')['exclude_user_login_mails'];
-      $config->set('excluded', $excluded);
+    if ($form_state->hasValue('excludes')) {
+      $excludes = ['customs' => [], 'sensitives' => []];
+      if (!empty($form_state->getValue('excludes')['customs'])) {
+        $excludes['customs'] = preg_split('/[\r\n]+/', $form_state->getValue('excludes')['customs'], 0, PREG_SPLIT_NO_EMPTY);
+      }
+      if ($form_state->getValue('excludes')['sensitives']) {
+        $excludes['sensitives'][] = 'user.password_reset';
+      }
+      $config->set('excludes', $excludes);
       $config->save();
 
-      if ($excluded['exclude_user_login_mails']) {
+      if (!empty($excludes['sensitives'])) {
         drupal_set_message($this->t('Drupal has been configured to exclude all user sensitives e-mails.'), 'status');
       }
       else {
@@ -127,7 +144,7 @@ class SettingsForm extends ConfigFormBase {
       $config->save();
 
       if ($form_state->getValue('reroute')['status']) {
-        drupal_set_message($this->t('Drupal has been configured to reroute all outgoing e-mails.'), 'status');
+        drupal_set_message($this->t('Drupal has been configured to reroute all outgoing e-mails.'), 'warning');
       }
     }
 
@@ -136,7 +153,7 @@ class SettingsForm extends ConfigFormBase {
       $config->save();
 
       if ($form_state->getValue('settings')['verbose']) {
-        drupal_set_message($this->t('Drupal has been configured to display all outgoing e-mails.'), 'status');
+        drupal_set_message($this->t('Drupal has been configured to display all outgoing e-mails.'), 'warning');
       }
     }
   }

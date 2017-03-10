@@ -1,2 +1,4 @@
-excluded:
-  exclude_user_login_mails: TRUE
+excludes:
+  customs: { }
+  sensitives:
+    - user_password_reset

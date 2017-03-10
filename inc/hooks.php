@@ -17,8 +17,13 @@ use Drupal\backerymails\Entity\BackerymailsEntity;
 function backerymails_mail_alter(&$message) {
   $config = \Drupal::config('backerymails.settings');
 
-  // Check exclusion of this mail - to be saved.
-  if ($config->get('excluded')['exclude_user_login_mails'] && $message['id'] == 'user_password_reset') {
+  $excludes = [];
+  // Get exclusion of sensitives mail(s) - to be skiped.
+  $excludes += $config->get('excludes')['sensitives'];
+  // Get exclusion of customs mail(s) - to be skiped.
+  $excludes = array_merge($excludes, $config->get('excludes')['customs']);
+  // Skip the saving for sensitives mail(s)
+  if (in_array($message['module'] . '.' . $message['key'], $excludes)) {
     return;
   }
 
