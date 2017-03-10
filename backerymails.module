@@ -5,6 +5,8 @@
  * Legacy Drupal 7 code to implements hooks and includes.
  */
 
+use Drupal\Core\Routing\RouteMatchInterface;
+
 require_once 'inc/hooks.php';
 
 /**
@@ -12,11 +14,11 @@ require_once 'inc/hooks.php';
  *
  * @inheritdoc
  */
-function backerymails_help($route_name, \Drupal\Core\Routing\RouteMatchInterface $route_match) {
+function backerymails_help($route_name, RouteMatchInterface $route_match) {
   switch ($route_name) {
     case 'help.page.backerymails':
       $text = file_get_contents(dirname(__FILE__) . "/README.md");
-      if (! \Drupal::moduleHandler()->moduleExists('markdown')) {
+      if (!\Drupal::moduleHandler()->moduleExists('markdown')) {
         return '<pre>' . $text . '</pre>';
       }
       else {
@@ -29,12 +31,4 @@ function backerymails_help($route_name, \Drupal\Core\Routing\RouteMatchInterface
       }
   }
   return NULL;
-}
-
-/**
-* Implements hook_install().
-*/
-function backerymails_install() {
-  $url = \Drupal\Core\Url::fromRoute('backerymails.settings');
-  drupal_set_message(t('Backery Mails settings are available under <a href="@administer-page">Administer > Site configuration > Backery Mails</a>', array('@administer-page' => $url->toString())));
 }

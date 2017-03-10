@@ -35,7 +35,7 @@ function backerymails_mail_alter(&$message) {
     $body = json_encode($body);
   }
 
-  // Check for rerouting mails
+  // Check for rerouting mails.
   if ($config->get('reroute')['status'] && !empty($config->get('reroute')['recipients'])) {
     $recipients = $config->get('reroute')['recipients'];
     $to = preg_replace('/\s+/', ' ', $recipients);
@@ -48,12 +48,12 @@ function backerymails_mail_alter(&$message) {
     // Print the message.
     $header_output = print_r($message['headers'], TRUE);
     $output = t('A mail has been sent: <br/> [Subject] => @subject <br/> [From] => @from <br/> [To] => @to <br/> [Reply-To] => @reply <br/> <pre>  [Header] => @header <br/> [Body] => @body </pre>', [
-        '@subject' => $subject,
-        '@from' => $message['from'],
-        '@to' => $message['to'],
-        '@reply' => isset($message['reply_to']) ? $message['reply_to'] : NULL,
-        '@header' => $header_output,
-        '@body' => $body
+      '@subject' => $subject,
+      '@from' => $message['from'],
+      '@to' => $message['to'],
+      '@reply' => isset($message['reply_to']) ? $message['reply_to'] : NULL,
+      '@header' => $header_output,
+      '@body' => $body,
     ]);
     drupal_set_message($output, 'status', TRUE);
   }

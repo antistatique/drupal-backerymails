@@ -66,18 +66,18 @@ class SettingsForm extends ConfigFormBase {
     );
 
     $form['reroute']['status'] = array(
-        '#type'          => 'checkbox',
-        '#title'         => $this->t('Enable rerouting'),
-        '#default_value' => $config->get('reroute')['status'],
-        '#description'   => $this->t('Check this box if you want to enable email rerouting. Uncheck to disable rerouting.'),
-      );
+      '#type'          => 'checkbox',
+      '#title'         => $this->t('Enable rerouting'),
+      '#default_value' => $config->get('reroute')['status'],
+      '#description'   => $this->t('Check this box if you want to enable email rerouting. Uncheck to disable rerouting.'),
+    );
 
-      $form['reroute']['recipients'] = array(
-        '#type'          => 'textfield',
-        '#title'         => $this->t('Recipient(s)'),
-        '#default_value' => $config->get('reroute')['recipients'],
-        '#description'   => $this->t('Use ";" (semicolon) as email delimiter when sending to multiple recipients.'),
-      );
+    $form['reroute']['recipients'] = array(
+      '#type'          => 'textfield',
+      '#title'         => $this->t('Recipient(s)'),
+      '#default_value' => $config->get('reroute')['recipients'],
+      '#description'   => $this->t('Use ";" (semicolon) as email delimiter when sending to multiple recipients.'),
+    );
 
     return $form;
   }
@@ -86,14 +86,14 @@ class SettingsForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
-        $mails = explode(';', $form_state->getValue('reroute')['recipients']);
-        $mails = array_map('trim', $mails);
-        foreach ($mails as $mail) {
-          if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
-            $form_state->setErrorByName('reroute', $this->t("@email isn't a valid address.", array('@email' => $mail)));
-          }
-        }
+    $mails = explode(';', $form_state->getValue('reroute')['recipients']);
+    $mails = array_map('trim', $mails);
+    foreach ($mails as $mail) {
+      if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
+        $form_state->setErrorByName('reroute', $this->t("@email isn't a valid address.", array('@email' => $mail)));
+      }
     }
+  }
 
   /**
    * {@inheritdoc}
@@ -118,26 +118,26 @@ class SettingsForm extends ConfigFormBase {
     }
 
     if ($form_state->hasValue('reroute')) {
-        $reroute = array(
-            'status'     => $form_state->getValue('reroute')['status'],
-            'recipients' => $form_state->getValue('reroute')['recipients'],
-        );
+      $reroute = array(
+        'status'     => $form_state->getValue('reroute')['status'],
+        'recipients' => $form_state->getValue('reroute')['recipients'],
+      );
 
-        $config->set('reroute', $reroute);
-        $config->save();
+      $config->set('reroute', $reroute);
+      $config->save();
 
-        if ($form_state->getValue('reroute')['status']) {
-          drupal_set_message($this->t('Drupal has been configured to reroute all outgoing e-mails.'), 'status');
-        }
+      if ($form_state->getValue('reroute')['status']) {
+        drupal_set_message($this->t('Drupal has been configured to reroute all outgoing e-mails.'), 'status');
+      }
     }
 
     if ($form_state->hasValue('settings')) {
-        $config->set('verbose', $form_state->getValue('settings')['verbose']);
-        $config->save();
+      $config->set('verbose', $form_state->getValue('settings')['verbose']);
+      $config->save();
 
-        if ($form_state->getValue('settings')['verbose']) {
-          drupal_set_message($this->t('Drupal has been configured to display all outgoing e-mails.'), 'status');
-        }
+      if ($form_state->getValue('settings')['verbose']) {
+        drupal_set_message($this->t('Drupal has been configured to display all outgoing e-mails.'), 'status');
+      }
     }
   }
 

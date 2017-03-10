@@ -1,0 +1,14 @@
+<?php
+
+/**
+ * @file
+ * Contains backerymails.install.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function backerymails_install() {
+  $url = Url::fromRoute('backerymails.settings');
+  drupal_set_message(t('Backery Mails settings are available under <a href="@administer-page">Administer > Site configuration > Backery Mails</a>', array('@administer-page' => $url->toString())));
+}
