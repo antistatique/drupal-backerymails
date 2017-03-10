@@ -53,8 +53,41 @@ class SettingsForm extends ConfigFormBase {
       '#description' => $this->t('Drupal send sensitives e-mails to user account such "forgotten password". Enabling this setting will result in excluding all sensitives e-mails to be saved.'),
     );
 
+
+    $form['reroute'] = array(
+      '#type' => 'fieldset',
+      '#title' => $this->t('Rerouting'),
+    );
+
+    $form['reroute']['status'] = array(
+        '#type'          => 'checkbox',
+        '#title'         => $this->t('Enable rerouting'),
+        '#default_value' => $config->get('reroute')['status'],
+        '#description'   => $this->t('Check this box if you want to enable email rerouting. Uncheck to disable rerouting.'),
+      );
+
+      $form['reroute']['recipients'] = array(
+        '#type'          => 'textfield',
+        '#title'         => $this->t('Recipient(s)'),
+        '#default_value' => $config->get('reroute')['recipients'],
+        '#description'   => $this->t('Use ";" (semicolon) as email delimiter when sending to multiple recipients.'),
+      );
+
     return $form;
   }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function validateForm(array &$form, FormStateInterface $form_state) {
+        $mails = explode(';', $form_state->getValue('reroute')['recipients']);
+        $mails = array_map('trim', $mails);
+        foreach ($mails as $mail) {
+          if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
+            $form_state->setErrorByName('reroute', $this->t("@email isn't a valid address.", array('@email' => $mail)));
+          }
+        }
+    }
 
   /**
    * {@inheritdoc}
@@ -62,7 +95,7 @@ class SettingsForm extends ConfigFormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $config = $this->config('backerymails.settings');
 
-    // Save it as array for evolutivity.
+    // Save it as array for futur-proof.
     $excluded = $config->get('excluded', array());
 
     if ($form_state->hasValue('settings', 'exclude_user_login_mails')) {
@@ -77,6 +110,21 @@ class SettingsForm extends ConfigFormBase {
         drupal_set_message($this->t('Drupal has been configured to save all e-mails, even sensitives ones.'), 'warning');
       }
     }
+
+    if ($form_state->hasValue('reroute')) {
+        $reroute = array(
+            'status'     => $form_state->getValue('reroute')['status'],
+            'recipients' => $form_state->getValue('reroute')['recipients'],
+        );
+
+        $config->set('reroute', $reroute);
+        $config->save();
+
+        if ($form_state->getValue('reroute')['status']) {
+          drupal_set_message($this->t('Drupal has been configured to reroute all outgoing e-mails.'), 'status');
+        }
+    }
+
   }
 
 }

@@ -15,9 +15,9 @@ use Drupal\backerymails\Entity\BackerymailsEntity;
  * Alter Drupal standard mail sender to trace the submission.
  */
 function backerymails_mail_alter(&$message) {
+  $config = \Drupal::config('backerymails.settings');
 
   // Check exclusion of this mail - to be saved.
-  $config = \Drupal::config('backerymails.settings');
   if ($config->get('excluded')['exclude_user_login_mails'] && $message['id'] == 'user_password_reset') {
     return;
   }
@@ -33,6 +33,14 @@ function backerymails_mail_alter(&$message) {
   }
   else {
     $body = json_encode($body);
+  }
+
+  // Check for rerouting mails
+  if ($config->get('reroute')['status'] && !empty($config->get('reroute')['recipients'])) {
+    $recipients = $config->get('reroute')['recipients'];
+    $to = preg_replace('/\s+/', ' ', $recipients);
+    $to = str_replace(';', ',', $to);
+    $message['to'] = $to;
   }
 
   $data = array(
