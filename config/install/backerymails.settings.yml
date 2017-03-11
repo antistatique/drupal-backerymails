@@ -1,3 +1,7 @@
+verbose: FALSE
+reroute:
+  status: FALSE
+  recipients: ''
 excludes:
   customs: { }
   sensitives:

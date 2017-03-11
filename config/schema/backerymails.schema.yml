@@ -1,0 +1,31 @@
+backerymails.settings:
+  type: config_object
+  label: 'Backermails settings'
+  mapping:
+    verbose:
+      type: boolean
+      label: 'Display the e-mails on page'
+    reroute:
+      type: mapping
+      label: 'Rerouting'
+      mapping:
+        status:
+          type: boolean
+          label: 'Enable rerouting'
+        recipients:
+          type: string
+          label: 'Recipient(s)'
+    excludes:
+      type: mapping
+      label: 'Exclude(s)'
+      mapping:
+        customs:
+          type: sequence
+          label: 'Exclude(s)'
+          sequence:
+            type: string
+        sensitives:
+          type: sequence
+          label: 'Exclude sensitives e-mails'
+          sequence:
+            type: string

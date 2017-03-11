@@ -1,6 +1,7 @@
 # Developing on BACKERYMAILS
 
-* Issues should be filed at https://www.drupal.org/project/issues/2846301
+* Issues should be filed at https://www.drupal.org/project/backerymails
+* Pull requests can be made against https://github.com/antistatique/drupal-backerymails/pulls
 
 ## 🔧 Prerequisites
 
@@ -9,6 +10,15 @@ First of all, you need to have the following tools installed globally on your en
   * composer
   * drush
   * Latest dev release of Drupal 8.x.
+
+## 🏆 Tests
+
+  Template Whisperer use BrowserTestBase to test
+  web-based behaviors and interactions.
+
+  ```bash
+    $ ../vendor/bin/phpunit --group backerymails_ui
+  ```
 
 ## 🚔 Check Drupal coding standards & Drupal best practices
 

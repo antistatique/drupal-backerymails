@@ -5,6 +5,8 @@
  * Contains backerymails.install.
  */
 
+use Drupal\Core\Url;
+
 /**
  * Implements hook_install().
  */

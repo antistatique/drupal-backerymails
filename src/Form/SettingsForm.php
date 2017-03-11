@@ -100,11 +100,13 @@ class SettingsForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
-    $mails = explode(';', $form_state->getValue('reroute')['recipients']);
-    $mails = array_map('trim', $mails);
-    foreach ($mails as $mail) {
-      if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
-        $form_state->setErrorByName('reroute', $this->t("@email isn't a valid address.", array('@email' => $mail)));
+    if (!empty($form_state->getValue('reroute')['recipients'])) {
+      $mails = explode(';', $form_state->getValue('reroute')['recipients']);
+      $mails = array_map('trim', $mails);
+      foreach ($mails as $mail) {
+        if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
+          $form_state->setErrorByName('reroute', $this->t("@email isn't a valid address.", array('@email' => $mail)));
+        }
       }
     }
   }
@@ -136,7 +138,7 @@ class SettingsForm extends ConfigFormBase {
 
     if ($form_state->hasValue('reroute')) {
       $reroute = array(
-        'status'     => $form_state->getValue('reroute')['status'],
+        'status'     => (bool) $form_state->getValue('reroute')['status'],
         'recipients' => $form_state->getValue('reroute')['recipients'],
       );
 
@@ -149,7 +151,7 @@ class SettingsForm extends ConfigFormBase {
     }
 
     if ($form_state->hasValue('settings')) {
-      $config->set('verbose', $form_state->getValue('settings')['verbose']);
+      $config->set('verbose', (bool) $form_state->getValue('settings')['verbose']);
       $config->save();
 
       if ($form_state->getValue('settings')['verbose']) {
