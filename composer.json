@@ -2,13 +2,15 @@
   "name": "drupal/backerymails",
   "description": "Save every going out mails using the MailManagerInterface & provides a user interface to retrieve them.",
   "type": "drupal-module",
-  "homepage": "https://www.drupal.org/sandbox/wengerk/2846301",
+  "homepage": "https://www.drupal.org/project/backerymails",
   "support": {
-    "issues": "https://www.drupal.org/project/issues/2846301"
+    "issues": "https://www.drupal.org/project/issues/backerymails"
   },
   "license": "GPL-2.0+",
   "require-dev": {
-      "squizlabs/php_codesniffer": "^2.7",
-      "drupal/coder": "^8.2.10"
-  }
+    "drupal/coder": "^8.2.10",
+    "squizlabs/php_codesniffer": "^2.7"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
 }
