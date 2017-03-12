@@ -6,9 +6,15 @@
   "support": {
     "issues": "https://www.drupal.org/project/issues/backerymails"
   },
+  "repositories": {
+    "drupal": {
+      "type": "composer",
+      "url": "https://packages.drupal.org/8"
+    }
+  },
   "license": "GPL-2.0+",
   "require-dev": {
-    "drupal/coder": "^8.2.10",
+    "drupal/coder": "^2.10",
     "squizlabs/php_codesniffer": "^2.7"
   },
   "minimum-stability": "dev",
