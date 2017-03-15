@@ -8,7 +8,7 @@
   },
   "license": "GPL-2.0+",
   "require-dev": {
-    "drupal/coder": "8.2.11",
+    "drupal/coder": "*",
     "squizlabs/php_codesniffer": "^2.7"
   },
   "minimum-stability": "dev",
