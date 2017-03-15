@@ -6,10 +6,29 @@
   "support": {
     "issues": "https://www.drupal.org/project/issues/backerymails"
   },
+  "authors": [
+      {
+          "name": "Antistatique SA",
+          "role": "Development Agency"
+      },
+      {
+          "name": "Kevin Wenger",
+          "role": "FullStack Developer"
+      }
+  ],
+  "repositories": {
+      "drupal": {
+          "type": "composer",
+          "url": "https://packages.drupal.org/8"
+      }
+  },
   "license": "GPL-2.0+",
   "require-dev": {
     "drupal/coder": "*",
     "squizlabs/php_codesniffer": "^2.7"
+  },
+  "require": {
+    "drupal/mailsystem": "~4.1"
   },
   "minimum-stability": "dev",
   "prefer-stable": true
