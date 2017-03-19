@@ -1,7 +1,9 @@
 # Developing on BACKERYMAILS
 
-* Issues should be filed at https://www.drupal.org/project/backerymails
-* Pull requests can be made against https://github.com/antistatique/drupal-backerymails/pulls
+* Issues should be filed at
+https://www.drupal.org/project/backerymails
+* Pull requests can be made against
+https://github.com/antistatique/drupal-backerymails/pulls
 
 ## 🔧 Prerequisites
 
