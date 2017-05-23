@@ -63,7 +63,7 @@ function backerymails_mail_alter(&$message) {
     drupal_set_message($output, 'status', TRUE);
   }
 
-  $data = array(
+  $data = [
     'module'        => $message['module'],
     'module_key'    => $message['key'],
     'mail_from'     => $message['from'],
@@ -72,7 +72,7 @@ function backerymails_mail_alter(&$message) {
     'langcode'      => isset($message['langcode']) ? $message['langcode'] : NULL,
     'subject'       => $subject,
     'body'          => $body,
-  );
+  ];
 
   $backerymail = BackerymailsEntity::create($data);
   $backerymail->save();

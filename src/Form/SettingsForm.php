@@ -37,61 +37,61 @@ class SettingsForm extends ConfigFormBase {
     $form['#tree'] = TRUE;
 
     // Display a page description.
-    $form['description'] = array(
+    $form['description'] = [
       '#markup' => '<p>' . $this->t('This page allows you to configure settings which determines how e-mail messages are saved.') . '</p>',
-    );
+    ];
 
-    $form['settings'] = array(
+    $form['settings'] = [
       '#type' => 'fieldset',
       '#title' => $this->t('General'),
-    );
+    ];
 
-    $form['settings']['verbose'] = array(
+    $form['settings']['verbose'] = [
       '#type' => 'checkbox',
       '#title' => $this->t("Display the e-mails on page."),
       '#default_value' => $config->get('verbose'),
       '#description' => $this->t('If enabled, anonymous users with permissions will see any verbose output mail.'),
-    );
+    ];
 
-    $form['excludes'] = array(
+    $form['excludes'] = [
       '#type' => 'fieldset',
       '#title' => $this->t('Exclude(s)'),
-    );
+    ];
 
-    $form['excludes']['sensitives'] = array(
+    $form['excludes']['sensitives'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Exclude sensitives e-mails.'),
       '#default_value' => !empty($config->get('excludes')['sensitives']),
       '#description' => $this->t('Drupal send sensitives e-mails to user account such "forgotten password". Enabling this setting will result in excluding all sensitives e-mails to be saved.'),
-    );
+    ];
 
-    $form['excludes']['customs'] = array(
+    $form['excludes']['customs'] = [
       '#type'          => 'textarea',
       '#title'         => $this->t('Exclude(s)'),
       '#default_value' => implode("\r\n", $config->get('excludes')['customs']),
       '#description'   => $this->t('Specify customs "module.key" to exclude. Enter one "module.key" per line. An example is "update.status_notify" for every update core mails.'),
       '#placeholder'   => 'update.status_notify',
-    );
+    ];
 
-    $form['reroute'] = array(
+    $form['reroute'] = [
       '#type' => 'fieldset',
       '#title' => $this->t('Rerouting'),
       '#description' => $this->t('When enabled, the choosen recipient(s) will override original recipient(s).'),
-    );
+    ];
 
-    $form['reroute']['status'] = array(
+    $form['reroute']['status'] = [
       '#type'          => 'checkbox',
       '#title'         => $this->t('Enable rerouting'),
       '#default_value' => $config->get('reroute')['status'],
       '#description'   => $this->t('Check this box if you want to enable email rerouting. Uncheck to disable rerouting.'),
-    );
+    ];
 
-    $form['reroute']['recipients'] = array(
+    $form['reroute']['recipients'] = [
       '#type'          => 'textfield',
       '#title'         => $this->t('Recipient(s)'),
       '#default_value' => $config->get('reroute')['recipients'],
       '#description'   => $this->t('Use ";" (semicolon) as email delimiter when sending to multiple recipients.'),
-    );
+    ];
 
     return $form;
   }
@@ -105,7 +105,7 @@ class SettingsForm extends ConfigFormBase {
       $mails = array_map('trim', $mails);
       foreach ($mails as $mail) {
         if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
-          $form_state->setErrorByName('reroute', $this->t("@email isn't a valid address.", array('@email' => $mail)));
+          $form_state->setErrorByName('reroute', $this->t("@email isn't a valid address.", ['@email' => $mail]));
         }
       }
     }
@@ -137,10 +137,10 @@ class SettingsForm extends ConfigFormBase {
     }
 
     if ($form_state->hasValue('reroute')) {
-      $reroute = array(
+      $reroute = [
         'status'     => (bool) $form_state->getValue('reroute')['status'],
         'recipients' => $form_state->getValue('reroute')['recipients'],
-      );
+      ];
 
       $config->set('reroute', $reroute);
       $config->save();
