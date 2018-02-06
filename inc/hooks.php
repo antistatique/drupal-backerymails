@@ -45,6 +45,12 @@ function backerymails_mail_alter(&$message) {
     $recipients = $config->get('reroute')['recipients'];
     $to = preg_replace('/\s+/', ' ', $recipients);
     $to = str_replace(';', ',', $to);
+
+    // Save the original recipients and store it into a custom header.
+    if (isset($message['to'])) {
+      $message['headers']['X-Backerymails-To'] = $message['to'];
+    }
+
     $message['to'] = $to;
   }
 
