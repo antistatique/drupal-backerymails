@@ -9,10 +9,9 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\backerymails\Entity\BackerymailsEntity;
 
 /**
- * Hook Mail Alter.
+ * Alter Drupal standard mail sender to trace the submission(s).
  *
  * Implements hook_mail_alter().
- * Alter Drupal standard mail sender to trace the submission.
  */
 function backerymails_mail_alter(&$message) {
   $config = \Drupal::config('backerymails.settings');
@@ -22,7 +21,7 @@ function backerymails_mail_alter(&$message) {
   $excludes += $config->get('excludes')['sensitives'];
   // Get exclusion of customs mail(s) - to be skiped.
   $excludes = array_merge($excludes, $config->get('excludes')['customs']);
-  // Skip the saving for sensitives mail(s)
+  // Skip the saving for sensitives mail(s).
   if (in_array($message['module'] . '.' . $message['key'], $excludes)) {
     return;
   }
@@ -52,6 +51,8 @@ function backerymails_mail_alter(&$message) {
     }
 
     $message['to'] = $to;
+    
+    // @TODO: remove CC & BCC when using reroute feature & add original recipients in a custom header.
   }
 
   // Display the e-mail if the verbose is enabled.
@@ -60,11 +61,11 @@ function backerymails_mail_alter(&$message) {
     $header_output = print_r($message['headers'], TRUE);
     $output = t('A mail has been sent: <br/> [Subject] => @subject <br/> [From] => @from <br/> [To] => @to <br/> [Reply-To] => @reply <br/> <pre>  [Header] => @header <br/> [Body] => @body </pre>', [
       '@subject' => $subject,
-      '@from' => $message['from'],
-      '@to' => $message['to'],
-      '@reply' => isset($message['reply_to']) ? $message['reply_to'] : NULL,
-      '@header' => $header_output,
-      '@body' => $body,
+      '@from'    => $message['from'],
+      '@to'      => $message['to'],
+      '@reply'   => isset($message['reply_to']) ? $message['reply_to'] : NULL,
+      '@header'  => $header_output,
+      '@body'    => $body,
     ]);
     drupal_set_message($output, 'status', TRUE);
   }
