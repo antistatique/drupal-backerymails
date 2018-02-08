@@ -16,6 +16,22 @@ use Drupal\backerymails\Entity\BackerymailsEntity;
 function backerymails_mail_alter(&$message) {
   $config = \Drupal::config('backerymails.settings');
 
+  // Check for rerouting mails.
+  if ($config->get('reroute')['status'] && !empty($config->get('reroute')['recipients'])) {
+    $recipients = $config->get('reroute')['recipients'];
+    $to = preg_replace('/\s+/', ' ', $recipients);
+    $to = str_replace(';', ',', $to);
+
+    // Save the original recipients and store it into a custom header.
+    if (isset($message['to'])) {
+      $message['headers']['X-Backerymails-To'] = $message['to'];
+    }
+
+    $message['to'] = $to;
+
+    // @TODO: remove CC & BCC when using reroute feature & add original recipients in a custom header.
+  }
+
   $excludes = [];
   // Get exclusion of sensitives mail(s) - to be skiped.
   $excludes += $config->get('excludes')['sensitives'];
@@ -37,22 +53,6 @@ function backerymails_mail_alter(&$message) {
   }
   else {
     $body = json_encode($body);
-  }
-
-  // Check for rerouting mails.
-  if ($config->get('reroute')['status'] && !empty($config->get('reroute')['recipients'])) {
-    $recipients = $config->get('reroute')['recipients'];
-    $to = preg_replace('/\s+/', ' ', $recipients);
-    $to = str_replace(';', ',', $to);
-
-    // Save the original recipients and store it into a custom header.
-    if (isset($message['to'])) {
-      $message['headers']['X-Backerymails-To'] = $message['to'];
-    }
-
-    $message['to'] = $to;
-    
-    // @TODO: remove CC & BCC when using reroute feature & add original recipients in a custom header.
   }
 
   // Display the e-mail if the verbose is enabled.
