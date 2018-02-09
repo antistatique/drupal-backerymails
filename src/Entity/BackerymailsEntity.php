@@ -31,7 +31,7 @@ use Drupal\Core\Entity\EntityTypeInterface;
  *     "id" = "id",
  *   },
  *   links = {
- *     "canonical" = "/admin/config/backerymails/mails/{sended_mail_entity}",
+ *     "canonical" = "/admin/config/backerymails/mails/{backerymails_entity}",
  *     "collection" = "/admin/config/backerymails/mails",
  *   },
  *   field_ui_base_route = "backerymails.settings"

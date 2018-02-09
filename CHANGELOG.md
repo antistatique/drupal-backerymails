@@ -3,6 +3,7 @@ CHANGELOG
 
 ## NEXT RELEASE
  - fix #2938562 - First install throw error `Route "backerymails.settings" does not exist.`
+ - fix #2925147 by gido, Nachini, wengerk: I cannot "Delete all"
 
 ## 8.x-1.2 (2017-01-11) 
  - fix the install issue (missing URL)
