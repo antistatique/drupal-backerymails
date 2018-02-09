@@ -9,20 +9,35 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\backerymails\Entity\BackerymailsEntity;
 
 /**
- * Hook Mail Alter.
+ * Alter Drupal standard mail sender to trace the submission(s).
  *
  * Implements hook_mail_alter().
- * Alter Drupal standard mail sender to trace the submission.
  */
 function backerymails_mail_alter(&$message) {
   $config = \Drupal::config('backerymails.settings');
+
+  // Check for rerouting mails.
+  if ($config->get('reroute')['status'] && !empty($config->get('reroute')['recipients'])) {
+    $recipients = $config->get('reroute')['recipients'];
+    $to = preg_replace('/\s+/', ' ', $recipients);
+    $to = str_replace(';', ',', $to);
+
+    // Save the original recipients and store it into a custom header.
+    if (isset($message['to'])) {
+      $message['headers']['X-Backerymails-To'] = $message['to'];
+    }
+
+    $message['to'] = $to;
+
+    // @TODO: remove CC & BCC when using reroute feature & add original recipients in a custom header.
+  }
 
   $excludes = [];
   // Get exclusion of sensitives mail(s) - to be skiped.
   $excludes += $config->get('excludes')['sensitives'];
   // Get exclusion of customs mail(s) - to be skiped.
   $excludes = array_merge($excludes, $config->get('excludes')['customs']);
-  // Skip the saving for sensitives mail(s)
+  // Skip the saving for sensitives mail(s).
   if (in_array($message['module'] . '.' . $message['key'], $excludes)) {
     return;
   }
@@ -40,25 +55,17 @@ function backerymails_mail_alter(&$message) {
     $body = json_encode($body);
   }
 
-  // Check for rerouting mails.
-  if ($config->get('reroute')['status'] && !empty($config->get('reroute')['recipients'])) {
-    $recipients = $config->get('reroute')['recipients'];
-    $to = preg_replace('/\s+/', ' ', $recipients);
-    $to = str_replace(';', ',', $to);
-    $message['to'] = $to;
-  }
-
   // Display the e-mail if the verbose is enabled.
   if ($config->get('verbose') && \Drupal::currentUser()->hasPermission('administer site configuration')) {
     // Print the message.
     $header_output = print_r($message['headers'], TRUE);
     $output = t('A mail has been sent: <br/> [Subject] => @subject <br/> [From] => @from <br/> [To] => @to <br/> [Reply-To] => @reply <br/> <pre>  [Header] => @header <br/> [Body] => @body </pre>', [
       '@subject' => $subject,
-      '@from' => $message['from'],
-      '@to' => $message['to'],
-      '@reply' => isset($message['reply_to']) ? $message['reply_to'] : NULL,
-      '@header' => $header_output,
-      '@body' => $body,
+      '@from'    => $message['from'],
+      '@to'      => $message['to'],
+      '@reply'   => isset($message['reply_to']) ? $message['reply_to'] : NULL,
+      '@header'  => $header_output,
+      '@body'    => $body,
     ]);
     drupal_set_message($output, 'status', TRUE);
   }
