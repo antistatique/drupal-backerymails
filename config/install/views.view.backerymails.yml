@@ -229,7 +229,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          label: 'Sended at'
+          label: 'Sent at'
           exclude: false
           alter:
             alter_text: false

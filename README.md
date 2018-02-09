@@ -8,11 +8,11 @@ Backerymails is awesome because it merges every must-have features about mails s
 ## You need Backerymails if
 
   - You send mails using the default Drupal 8 integration - MailManagerInterface.
-  - You want to keep a trace of sended mails.
+  - You want to keep a trace of sent mails.
   - You want to reroutes every going out mails for developments purpose.
   - You need to test the mail functionality of other modules or the drupal core.
-  - You create statistics about sended mails.
-  - Your need to keed a backup of every sended mails to prevent any troubles with providers or sending methodology.
+  - You create statistics about sent mails.
+  - Your need to keed a backup of every sent mails to prevent any troubles with providers or sending methodology.
   - You want to customize the backup/logging page using [Views](https://www.drupal.org/project/views).
 
 Backerymails can do a lot more than that, but those are some of the obvious uses of Backerymails.
