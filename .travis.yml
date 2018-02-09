@@ -39,6 +39,8 @@ env:
     # The installation profile to use:
     #- DRUPAL_TI_INSTALL_PROFILE="testing"
 
+    - COMPOSER_EXTRA_DEPENDENCIES="drupal/mailsystem:^4.1"
+
     # Drupal specific variables.
     - DRUPAL_TI_DB="drupal_travis_db"
     - DRUPAL_TI_DB_URL="mysql://root:@127.0.0.1/drupal_travis_db"
@@ -100,14 +102,14 @@ mysql:
 before_install:
   - composer self-update
   - cd ./tests
-  - composer global require "lionsad/drupal_ti:1.*"
+  - composer global config repositories.repo-name git https://github.com/wengerk/drupal_ti
+  - composer global require "lionsad/drupal_ti:dev-d8-composer-extra-vendors" --no-interaction
   - drupal-ti before_install
 
 install:
   - drupal-ti install
 
 before_script:
-  - echo "$DRUPAL_TI_DRUPAL_DIR"
   - drupal-ti before_script
 
 script:
