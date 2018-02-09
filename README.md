@@ -3,6 +3,7 @@
 Backerymails is awesome because it merges every must-have features about mails such:
   - Save every going out mails using the MailManagerInterface & provides a user interface to retrieve them
   - Can intercepts all going out mails and reroutes them to some configurable email(s) address(es)
+  - Keep original recipient(s) into headers when rerouting
   - Additionally you can immediately display the mail through devel dpm()
 
 ## You need Backerymails if
