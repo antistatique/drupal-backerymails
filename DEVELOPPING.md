@@ -19,7 +19,8 @@ Github repo
 
 ## 🔧 Prerequisites
 
-First of all, you need to have the following tools installed globally on your environment:
+First of all, you need to have the following tools installed globally on your
+environment:
 
   * composer
   * drush
@@ -48,8 +49,10 @@ Run the functional tests:
   ```bash
   # You must be on the drupal-root folder - usually /web.
   $ cd web
-  $ ../vendor/bin/phpunit -c core \
-  --group backerymails_ui
+  $ SIMPLETEST_DB="sqlite://localhost//tmp/tw.sqlite" \
+  SIMPLETEST_BASE_URL='http://d8.test' \
+  ../vendor/bin/phpunit -c core \
+  --group backerymails
   ```
 
 Debug using
@@ -57,10 +60,15 @@ Debug using
   ```bash
   # You must be on the drupal-root folder - usually /web.
   $ cd web
-  $ ../vendor/bin/phpunit -c core \
-  --group backerymails_ui \
+  $ SIMPLETEST_DB="sqlite://localhost//tmp/tw.sqlite" \
+  SIMPLETEST_BASE_URL='http://d8.test' \
+  ../vendor/bin/phpunit -c core \
+  --group backerymails \
   --printer="\Drupal\Tests\Listeners\HtmlOutputPrinter" --stop-on-error
   ```
+
+You must provide a `BROWSERTEST_OUTPUT_DIRECTORY`,
+Eg. `/path/to/webroot/sites/simpletest/browser_output`.
 
 You must provide a `BROWSERTEST_OUTPUT_DIRECTORY`,
 Eg. `/path/to/webroot/sites/simpletest/browser_output`.
