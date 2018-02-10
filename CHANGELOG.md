@@ -2,6 +2,10 @@ CHANGELOG
 ---------
 
 ## NEXT RELEASE
+ - add travis integration
+ - add styleci integration
+ 
+## 8.x-1.3 (2018-02-09)
  - fix #2938562 - First install throw error `Route "backerymails.settings" does not exist.`
  - fix #2925147 by gido, Nachini, wengerk: I cannot "Delete all"
  - fix typo 'sended' -> 'sent'
