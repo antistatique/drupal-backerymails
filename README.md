@@ -4,7 +4,7 @@ Save every going out mails.
 
 |       Travis-CI        |        Style-CI         |        Downloads        |         Releases         |
 |:----------------------:|:-----------------------:|:-----------------------:|:------------------------:|
-| [![Travis](https://img.shields.io/travis/antistatique/drupal-backerymails.svg?style=flat-square)](https://travis-ci.org/antistatique/drupal-backerymails) | [![StyleCI](https://styleci.io/repos/85471768/shield)](https://styleci.io/repos/85471768) | [![Downloads](https://img.shields.io/badge/downloads-8.x--1.x-green.svg?style=flat-square)](https://ftp.drupal.org/files/projects/backerymails-8.x-1.x-dev.tar.gz) | [![Latest Stable Version](https://img.shields.io/badge/release-v1.2.x--dev-blue.svg?style=flat-square)](https://www.drupal.org/project/backerymails/releases) |
+| [![Travis](https://img.shields.io/travis/antistatique/drupal-backerymails.svg?style=flat-square)](https://travis-ci.org/antistatique/drupal-backerymails) | [![StyleCI](https://styleci.io/repos/85471768/shield)](https://styleci.io/repos/85471768) | [![Downloads](https://img.shields.io/badge/downloads-8.x--1.x-green.svg?style=flat-square)](https://ftp.drupal.org/files/projects/backerymails-8.x-1.x-dev.tar.gz) | [![Latest Stable Version](https://img.shields.io/badge/release-v1.3.x--dev-blue.svg?style=flat-square)](https://www.drupal.org/project/backerymails/releases) |
 
 Backerymails is awesome because it merges every must-have features about mails such as :
 
