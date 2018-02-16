@@ -1,6 +1,10 @@
 CHANGELOG
 ---------
 
+## NEXT RELEASE
+ - add travis integration
+ - add styleci integration
+ 
 ## 8.x-1.3 (2018-02-09)
  - fix #2938562 - First install throw error `Route "backerymails.settings" does not exist.`
  - fix #2925147 by gido, Nachini, wengerk: I cannot "Delete all"
@@ -8,7 +12,7 @@ CHANGELOG
  - add custom HEADER to store original recipient when rerouted
  - fix issue that prevent sensitives mails to be rerouted
 
-## 8.x-1.2 (2017-01-11) 
+## 8.x-1.2 (2017-01-11)
  - fix the install issue (missing URL)
  - add BrowserTest
  - add Configuration Schema file
@@ -16,6 +20,6 @@ CHANGELOG
 ## 8.x-1.1 (2017-03-10)
  - customs module.key exclusions
  - entity action to clear all entries
- 
+
 ## 8.x-1.0 (2017-03-10)
  - release

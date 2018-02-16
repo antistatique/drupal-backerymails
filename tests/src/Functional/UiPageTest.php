@@ -6,6 +6,7 @@ namespace Drupal\Tests\backerymails\Functional;
  * Tests collection pages and clean.
  *
  * @group backerymails_ui
+ * @group backerymails
  */
 class UiPageTest extends BackerymailsTestBase {
 
