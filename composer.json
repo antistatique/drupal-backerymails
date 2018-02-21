@@ -26,7 +26,7 @@
           "url": "https://packages.drupal.org/8"
       }
   },
-  "license": "GPL-2.0+",
+  "license": "GPL-2.0-or-later",
   "require-dev": {
     "drupal/coder": "*",
     "squizlabs/php_codesniffer": "^2.7"
