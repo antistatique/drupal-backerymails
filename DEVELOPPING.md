@@ -9,7 +9,7 @@ https://github.com/antistatique/drupal-backerymails/pulls
 
 Drupal repo
   ```
-  git remote add drupal https://wengerk@git.drupal.org:project/backerymails.git
+  git remote add drupal git@git.drupal.org:project/backerymails.git
   ```
 
 Github repo
