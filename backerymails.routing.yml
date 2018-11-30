@@ -20,15 +20,15 @@ backerymails.settings:
     _permission: 'administer backerymails'
 
 # Detail
-entity.backerymails.canonical:
+entity.backerymails_entity.canonical:
   path: '/admin/config/backerymails/mails/{backerymails_entity}'
   defaults:
     # Calls the view controller, defined in the annotation of the contact entity
-    _entity_view: 'backerymails'
+    _entity_view: 'backerymails_entity.full'
     _title: 'Mail Content'
   requirements:
     # Calls the access controller of the entity, $operation 'view'
-    _entity_access: 'backerymails.view'
+    _entity_access: 'backerymails_entity.view'
 
 # Clear all emails.
 entity.backerymails.clear:
