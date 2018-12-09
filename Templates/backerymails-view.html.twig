@@ -1,19 +1,19 @@
 <table>
   <thead>
     <tr>
-      <th>Id</th>
-      <th>From</th>
-      <th>To</th>
-      <th>Reply to</th>
-      <th>Lang</th>
-      <th>Subject</th>
-      <th>Body</th>
-      <th>Sent at</th>
+      <th>{{ 'Id'|t }}</th>
+      <th>{{ 'From'|t }}</th>
+      <th>{{ 'To'|t }}</th>
+      <th>{{ 'Reply to'|t }}</th>
+      <th>{{ 'Lang'|t }}</th>
+      <th>{{ 'Subject'|t }}</th>
+      <th>{{ 'Body'|t }}</th>
+      <th>{{ 'Sent at'|t }}</th>
     </tr>
   </thead>
 
   <tbody>
-    <tr class="odd">
+    <tr>
       <td>{{ variables.id.value }}</td>
       <td>{{ variables.mail_from.value }}</td>
       <td>{{ variables.mail_to.value }}</td>
