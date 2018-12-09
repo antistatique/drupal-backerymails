@@ -20,7 +20,7 @@
       <td>{{ variables.mail_reply_to.value }}</td>
       <td>{{ variables.langcode.value }}</td>
       <td>{{ variables.subject.value|raw }}</td>
-      <td>{{ variables.body.value|raw }}</td>
+      <td>{{ variables.body.value|replace({'["': '', '"]': '', "\",\"": '', "\\/": "/"})|raw }}</td>
       <td>{{ variables.created.value|date('Y-m-d H:i:s') }}</td>
     <td>
   </tbody>
