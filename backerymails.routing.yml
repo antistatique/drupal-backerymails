@@ -23,7 +23,7 @@ backerymails.settings:
 entity.backerymails_entity.canonical:
   path: '/admin/config/backerymails/mails/{backerymails_entity}'
   defaults:
-    # Calls the view controller, defined in the annotation of the contact entity
+    _controller: '\Drupal\backerymails\Controller\viewController::build'
     _entity_view: 'backerymails_entity.full'
     _title: 'Mail Content'
   requirements:
