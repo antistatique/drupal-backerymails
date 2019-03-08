@@ -7,19 +7,11 @@ use Drupal\Core\Url;
 use Drupal\Core\Form\FormStateInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\Core\Entity\Query\QueryFactory;
 
 /**
  * Provides a form for clearing all the maillog entries.
  */
 class ClearForm extends ConfirmFormBase {
-  /**
-   * EntityQuery instance.
-   *
-   * @var \Drupal\Core\Entity\Query\QueryFactory
-   */
-  private $entityQuery;
-
   /**
    * EntityTypeManagerInterface to load Backerymails.
    *
@@ -32,12 +24,9 @@ class ClearForm extends ConfirmFormBase {
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity
    *   The interface for entity type managers.
-   * @param \Drupal\Core\Entity\Query\QueryFactory $entityQuery
-   *   The factory class Creating entity query objects.
    */
-  public function __construct(EntityTypeManagerInterface $entity, QueryFactory $entityQuery) {
+  public function __construct(EntityTypeManagerInterface $entity) {
     $this->entityBackerymails = $entity->getStorage('backerymails_entity');
-    $this->entityQuery        = $entityQuery;
   }
 
   /**
@@ -47,8 +36,7 @@ class ClearForm extends ConfirmFormBase {
     // Instantiates this form class.
     return new static(
     // Load the service required to construct this class.
-    $container->get('entity_type.manager'),
-    $container->get('entity.query')
+    $container->get('entity_type.manager')
     );
   }
 
@@ -91,12 +79,10 @@ class ClearForm extends ConfirmFormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $result = $this->entityQuery->get('backerymails_entity')
-      ->execute();
+    $result = $this->entityBackerymails->getQuery()->execute();
     $entities = $this->entityBackerymails->loadMultiple($result);
     $this->entityBackerymails->delete($entities);
-
-    drupal_set_message($this->t("All backerymails entries have been deleted."));
+    $this->messenger()->addMessage($this->t("All backerymails entries have been deleted."));
     $form_state->setRedirect('backerymails.settings');
   }
 

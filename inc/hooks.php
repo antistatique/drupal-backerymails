@@ -67,7 +67,8 @@ function backerymails_mail_alter(&$message) {
       '@header'  => $header_output,
       '@body'    => $body,
     ]);
-    drupal_set_message($output, 'status', TRUE);
+    $messenger = \Drupal::messenger();
+    $messenger->addMessage($output, 'status', TRUE);
   }
 
   $data = [
