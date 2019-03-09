@@ -34,8 +34,8 @@ env:
     # The environment to use, supported are: drupal-7, drupal-8
     - DRUPAL_TI_ENVIRONMENT="drupal-8"
 
-    # Switch to 8.4.x versions instead of 8.1.x by default.
-    - DRUPAL_TI_CORE_BRANCH="8.4.x"
+    # Switch to 8.8.x versions instead of 8.1.x by default.
+    - DRUPAL_TI_CORE_BRANCH="8.8.x"
 
     # The installation profile to use:
     #- DRUPAL_TI_INSTALL_PROFILE="testing"
