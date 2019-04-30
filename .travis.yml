@@ -4,6 +4,7 @@
 # Template provided by https://github.com/LionsAd/drupal_ti.
 
 language: php
+dist: trusty
 
 sudo: false
 
