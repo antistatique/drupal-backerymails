@@ -4,12 +4,14 @@
 # Template provided by https://github.com/LionsAd/drupal_ti.
 
 language: php
-dist: trusty
 
 sudo: false
 
 php:
   - 7.1
+
+services:
+  - mysql
 
 matrix:
   include:
