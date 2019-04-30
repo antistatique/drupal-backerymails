@@ -42,7 +42,7 @@ env:
     - DRUPAL_TI_ENVIRONMENT="drupal-8"
 
     # The drush version to use, by default: drush/drush:8.0.*
-    - DRUPAL_TI_DRUSH_VERSION="drush/drush:~9.0"
+    # - DRUPAL_TI_DRUSH_VERSION="drush/drush:~9.0"
 
     # Switch to 8.7.x versions instead of 8.1.x by default.
     - DRUPAL_TI_CORE_BRANCH="8.7.x"
