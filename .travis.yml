@@ -10,6 +10,15 @@ sudo: false
 php:
   - 7.1
 
+matrix:
+  include:
+    - name: PHP 7.1 & MySQL 5.7, D8.7
+      php: 7.1
+      env: DRUPAL_TI_RUNNERS="phpunit-core" DRUPAL_TI_CORE_BRANCH="8.7.x"
+    - name: PHP 7.1 & MySQL 5.7, D8.8
+      php: 7.1
+      env: DRUPAL_TI_RUNNERS="phpunit-core" DRUPAL_TI_CORE_BRANCH="8.8.x"
+
 env:
   global:
     # add composer's global bin directory to the path
@@ -29,8 +38,8 @@ env:
     # The environment to use, supported are: drupal-7, drupal-8
     - DRUPAL_TI_ENVIRONMENT="drupal-8"
 
-    # Switch to 8.6.x versions instead of 8.1.x by default.
-    - DRUPAL_TI_CORE_BRANCH="8.6.x"
+    # Switch to 8.7.x versions instead of 8.1.x by default.
+    - DRUPAL_TI_CORE_BRANCH="8.7.x"
 
     # The installation profile to use:
     #- DRUPAL_TI_INSTALL_PROFILE="testing"
