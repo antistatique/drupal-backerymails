@@ -8,12 +8,19 @@ language: php
 sudo: false
 
 php:
-  - 7
+  - 7.1
+
+services:
+  - mysql
 
 matrix:
-  fast_finish: true
-  allow_failures:
-    - php: hhvm
+  include:
+    - name: PHP 7.1 & MySQL 5.7, D8.7
+      php: 7.1
+      env: DRUPAL_TI_RUNNERS="phpunit-core" DRUPAL_TI_CORE_BRANCH="8.7.x"
+    - name: PHP 7.1 & MySQL 5.7, D8.8
+      php: 7.1
+      env: DRUPAL_TI_RUNNERS="phpunit-core" DRUPAL_TI_CORE_BRANCH="8.8.x"
 
 env:
   global:
@@ -34,8 +41,11 @@ env:
     # The environment to use, supported are: drupal-7, drupal-8
     - DRUPAL_TI_ENVIRONMENT="drupal-8"
 
-    # Switch to 8.8.x versions instead of 8.1.x by default.
-    - DRUPAL_TI_CORE_BRANCH="8.8.x"
+    # The drush version to use, by default: drush/drush:8.0.*
+    # - DRUPAL_TI_DRUSH_VERSION="drush/drush:~9.0"
+
+    # Switch to 8.7.x versions instead of 8.1.x by default.
+    - DRUPAL_TI_CORE_BRANCH="8.7.x"
 
     # The installation profile to use:
     #- DRUPAL_TI_INSTALL_PROFILE="testing"
@@ -111,6 +121,8 @@ install:
 
 before_script:
   - drupal-ti before_script
+  # Update from PHPUnit 4.x to 6.x as required by Drupal 8.6.x.
+  - composer run-script drupal-phpunit-upgrade --working-dir=/home/travis/build/antistatique/drupal-8/drupal --no-interaction
 
 script:
   - drupal-ti script
