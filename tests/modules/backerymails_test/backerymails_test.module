@@ -20,12 +20,10 @@ function backerymails_test_mail($key, &$message, $params) {
     $message['headers'][$i] = $value;
   }
 
-  // Save the original cc and store it into a custom header.
   if (isset($message['params']['cc'])) {
     $message['headers']['Cc'] = $message['params']['cc'];
   }
 
-  // Save the original recipients and store it into a custom header.
   if (isset($message['params']['bcc'])) {
     $message['headers']['Bcc'] = $message['params']['bcc'];
   }

@@ -35,7 +35,7 @@ function backerymails_mail_alter(&$message) {
       $message['headers']['Cc'] = $to;
     }
 
-    // Save the original recipients and store it into a custom header.
+    // Save the original bcc and store it into a custom header.
     if (isset($message['headers']['Bcc'])) {
       $message['headers']['X-Backerymails-Bcc'] = $message['headers']['Bcc'];
       $message['headers']['Bcc'] = $to;
