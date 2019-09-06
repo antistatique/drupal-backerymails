@@ -29,7 +29,17 @@ function backerymails_mail_alter(&$message) {
 
     $message['to'] = $to;
 
-    // @TODO: remove CC & BCC when using reroute feature & add original recipients in a custom header.
+    // Save the original cc and store it into a custom header.
+    if (isset($message['headers']['Cc'])) {
+      $message['headers']['X-Backerymails-Cc'] = $message['headers']['Cc'];
+      $message['headers']['Cc'] = $to;
+    }
+
+    // Save the original recipients and store it into a custom header.
+    if (isset($message['headers']['Bcc'])) {
+      $message['headers']['X-Backerymails-Bcc'] = $message['headers']['Bcc'];
+      $message['headers']['Bcc'] = $to;
+    }
   }
 
   $excludes = [];

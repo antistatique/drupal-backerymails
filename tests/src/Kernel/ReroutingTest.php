@@ -91,7 +91,7 @@ class ReroutingTest extends KernelTestBase {
     $this->assertNull($captured_email['reply-to']);
     $this->assertSame([
       'MIME-Version'              => "1.0",
-      'Content-Type'              => "text/plain; charset=UTF-8; format=flowed; delsp=yes",
+      'Content-Type'              => "text/html; charset=UTF-8; format=flowed; delsp=yes",
       'Content-Transfer-Encoding' => "8Bit",
       'X-Mailer'                  => "Drupal",
       'Return-Path'               => 'admin@example.org',
@@ -133,7 +133,7 @@ class ReroutingTest extends KernelTestBase {
     $this->assertNull($captured_email['reply-to']);
     $this->assertSame([
       'MIME-Version'              => "1.0",
-      'Content-Type'              => "text/plain; charset=UTF-8; format=flowed; delsp=yes",
+      'Content-Type'              => "text/html; charset=UTF-8; format=flowed; delsp=yes",
       'Content-Transfer-Encoding' => "8Bit",
       'X-Mailer'                  => "Drupal",
       'Return-Path'               => 'admin@example.org',
@@ -159,6 +159,84 @@ class ReroutingTest extends KernelTestBase {
     // Asserts we don't store any exclusions.
     $stored_emails = $this->backerymailsStorage->loadMultiple();
     $this->assertCount(0, $stored_emails, 'No email was rerouted.');
+  }
+
+  /**
+   * Asserts the rerouting alter the mail CC.
+   */
+  public function testRerouteCopyCarbon() {
+    $this->container->get('config.factory')->getEditable('backerymails.settings')
+      ->set('reroute', [
+        'status'     => TRUE,
+        'recipients' => 'reroute@example.org',
+      ])->save();
+
+    // Send the email.
+    $this->mailManager->mail('backerymails_test', 'test', 'foobar@example.org', 'en', [
+      'cc' => 'cc@example.org',
+    ]);
+
+    // Asserts only one mail has been rerouted.
+    $stored_emails = $this->backerymailsStorage->loadMultiple();
+    $this->assertCount(1, $stored_emails, 'One email was rerouted.');
+
+    // Asserts we have added the Backerymails headers because of rerouting.
+    $captured_emails = $this->getMails();
+    $captured_email = reset($captured_emails);
+    $this->assertEquals('backerymails_test_test', $captured_email['id']);
+    $this->assertEquals('admin@example.org', $captured_email['from']);
+    $this->assertNull($captured_email['reply-to']);
+    $this->assertEquals([
+      'MIME-Version'              => "1.0",
+      'Content-Type'              => "text/html; charset=UTF-8; format=flowed; delsp=yes",
+      'Content-Transfer-Encoding' => "8Bit",
+      'X-Mailer'                  => "Drupal",
+      'Return-Path'               => 'admin@example.org',
+      'Sender'                    => 'admin@example.org',
+      'From'                      => ' <admin@example.org>',
+      'Cc'                        => 'reroute@example.org',
+      'X-Backerymails-To'         => 'foobar@example.org',
+      'X-Backerymails-Cc'         => 'cc@example.org',
+    ], $captured_email['headers']);
+  }
+
+  /**
+   * Asserts the rerouting alter the mail BCC.
+   */
+  public function testRerouteBlindCopyCarbon() {
+    $this->container->get('config.factory')->getEditable('backerymails.settings')
+      ->set('reroute', [
+        'status'     => TRUE,
+        'recipients' => 'reroute@example.org',
+      ])->save();
+
+    // Send the email.
+    $this->mailManager->mail('backerymails_test', 'test', 'foobar@example.org', 'en', [
+      'bcc' => 'bcc@example.org',
+    ]);
+
+    // Asserts only one mail has been rerouted.
+    $stored_emails = $this->backerymailsStorage->loadMultiple();
+    $this->assertCount(1, $stored_emails, 'One email was rerouted.');
+
+    // Asserts we have added the Backerymails headers because of rerouting.
+    $captured_emails = $this->getMails();
+    $captured_email = reset($captured_emails);
+    $this->assertEquals('backerymails_test_test', $captured_email['id']);
+    $this->assertEquals('admin@example.org', $captured_email['from']);
+    $this->assertNull($captured_email['reply-to']);
+    $this->assertEquals([
+      'MIME-Version'              => "1.0",
+      'Content-Type'              => "text/html; charset=UTF-8; format=flowed; delsp=yes",
+      'Content-Transfer-Encoding' => "8Bit",
+      'X-Mailer'                  => "Drupal",
+      'Return-Path'               => 'admin@example.org',
+      'Sender'                    => 'admin@example.org',
+      'From'                      => ' <admin@example.org>',
+      'Bcc'                       => 'reroute@example.org',
+      'X-Backerymails-To'         => 'foobar@example.org',
+      'X-Backerymails-Bcc'        => 'bcc@example.org',
+    ], $captured_email['headers']);
   }
 
   /**
