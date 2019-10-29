@@ -123,6 +123,9 @@ before_script:
   - drupal-ti before_script
 
 script:
+  # Disable deprecations helper to avoid build failed caused by usage of
+  # deprecations in Drupal Core.
+  - export SYMFONY_DEPRECATIONS_HELPER=disabled
   - drupal-ti script
 
 after_script:
