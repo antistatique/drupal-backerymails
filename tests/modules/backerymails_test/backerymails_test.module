@@ -1,0 +1,39 @@
+<?php
+
+/**
+ * @file
+ * Legacy Drupal 7 code to implements hooks and includes.
+ */
+
+/**
+ * Mail hook.
+ */
+function backerymails_test_mail($key, &$message, $params) {
+  $headers = [
+    'MIME-Version'              => '1.0',
+    'Content-Type'              => 'text/html; charset=UTF-8; format=flowed; delsp=yes',
+    'Content-Transfer-Encoding' => '8Bit',
+  ];
+
+  // Add headers.
+  foreach ($headers as $i => $value) {
+    $message['headers'][$i] = $value;
+  }
+
+  if (isset($message['params']['cc'])) {
+    $message['headers']['Cc'] = $message['params']['cc'];
+  }
+
+  if (isset($message['params']['bcc'])) {
+    $message['headers']['Bcc'] = $message['params']['bcc'];
+  }
+
+  switch ($key) {
+
+    case 'test':
+    default:
+      $message['subject'] = 'foo';
+      $message['body'][] = 'bar';
+      break;
+  }
+}

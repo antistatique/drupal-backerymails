@@ -4,7 +4,8 @@ CHANGELOG
 ## NEXT RELEASE
  - add travis integration
  - add styleci integration
- 
+ - close #3044923 - fix Drupal-CI Composer failure since Drupal 8.7.x+ - Update of drupal/coder squizlabs/php_codesniffer"
+
 ## 8.x-1.3 (2018-02-09)
  - fix #2938562 - First install throw error `Route "backerymails.settings" does not exist.`
  - fix #2925147 by gido, Nachini, wengerk: I cannot "Delete all"

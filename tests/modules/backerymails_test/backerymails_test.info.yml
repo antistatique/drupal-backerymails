@@ -1,0 +1,8 @@
+name: Backery Mails test
+description: Support module for Backery Mails testing.
+package: Testing
+type: module
+core: 8.x
+
+dependencies:
+  - backerymails:backerymails

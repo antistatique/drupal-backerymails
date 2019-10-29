@@ -129,10 +129,10 @@ class SettingsForm extends ConfigFormBase {
       $config->save();
 
       if (!empty($excludes['sensitives'])) {
-        drupal_set_message($this->t('Drupal has been configured to exclude all user sensitives e-mails.'), 'status');
+        $this->messenger()->addMessage($this->t('Drupal has been configured to exclude all user sensitives e-mails.'), 'status');
       }
       else {
-        drupal_set_message($this->t('Drupal has been configured to save all e-mails, even sensitives ones.'), 'warning');
+        $this->messenger()->addMessage($this->t('Drupal has been configured to save all e-mails, even sensitives ones.'), 'warning');
       }
     }
 
@@ -146,7 +146,7 @@ class SettingsForm extends ConfigFormBase {
       $config->save();
 
       if ($form_state->getValue('reroute')['status']) {
-        drupal_set_message($this->t('Drupal has been configured to reroute all outgoing e-mails.'), 'warning');
+        $this->messenger()->addMessage($this->t('Drupal has been configured to reroute all outgoing e-mails.'), 'warning');
       }
     }
 
@@ -155,7 +155,7 @@ class SettingsForm extends ConfigFormBase {
       $config->save();
 
       if ($form_state->getValue('settings')['verbose']) {
-        drupal_set_message($this->t('Drupal has been configured to display all outgoing e-mails.'), 'warning');
+        $this->messenger()->addMessage($this->t('Drupal has been configured to display all outgoing e-mails.'), 'warning');
       }
     }
   }

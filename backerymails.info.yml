@@ -6,6 +6,6 @@ core: 8.x
 
 dependencies:
   - drupal:views
-  - drupal:mailsystem
+  - mailsystem:mailsystem
 
 configure: backerymails.settings

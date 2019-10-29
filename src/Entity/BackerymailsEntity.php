@@ -2,7 +2,6 @@
 
 namespace Drupal\backerymails\Entity;
 
-use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityChangedTrait;
@@ -38,15 +37,7 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
  * )
  */
 class BackerymailsEntity extends ContentEntityBase implements BackerymailsEntityInterface {
-
   use EntityChangedTrait;
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function preCreate(EntityStorageInterface $storage_controller, array &$values) {
-    parent::preCreate($storage_controller, $values);
-  }
 
   /**
    * Get the Created date.

@@ -29,7 +29,17 @@ function backerymails_mail_alter(&$message) {
 
     $message['to'] = $to;
 
-    // @TODO: remove CC & BCC when using reroute feature & add original recipients in a custom header.
+    // Save the original cc and store it into a custom header.
+    if (isset($message['headers']['Cc'])) {
+      $message['headers']['X-Backerymails-Cc'] = $message['headers']['Cc'];
+      $message['headers']['Cc'] = $to;
+    }
+
+    // Save the original bcc and store it into a custom header.
+    if (isset($message['headers']['Bcc'])) {
+      $message['headers']['X-Backerymails-Bcc'] = $message['headers']['Bcc'];
+      $message['headers']['Bcc'] = $to;
+    }
   }
 
   $excludes = [];
@@ -39,6 +49,7 @@ function backerymails_mail_alter(&$message) {
   $excludes = array_merge($excludes, $config->get('excludes')['customs']);
   // Skip the saving for sensitives mail(s).
   if (in_array($message['module'] . '.' . $message['key'], $excludes)) {
+    $message['send'] = FALSE;
     return;
   }
 
@@ -67,7 +78,8 @@ function backerymails_mail_alter(&$message) {
       '@header'  => $header_output,
       '@body'    => $body,
     ]);
-    drupal_set_message($output, 'status', TRUE);
+    $messenger = \Drupal::messenger();
+    $messenger->addMessage($output, 'status', TRUE);
   }
 
   $data = [
