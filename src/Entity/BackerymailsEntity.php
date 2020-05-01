@@ -24,7 +24,7 @@ use Drupal\Core\Entity\EntityTypeInterface;
  *     },
  *     "access" = "Drupal\backerymails\BackerymailsEntityAccessControlHandler",
  *   },
- *   base_table = "backerymails_sended_mail",
+ *   base_table = "backerymails_sent_mails",
  *   admin_permission = "administer backerymails",
  *   entity_keys = {
  *     "id" = "id",
