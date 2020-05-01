@@ -38,7 +38,7 @@ class SkipEntityTableUpdate8001WhenExistingTest extends UpdatePathTestBase {
    */
   protected function doSelectionTest() {
     parent::doSelectionTest();
-    $this->assertSession()->responseContains('8001 -   Update Backerymails entity base table in order to fix typo in table name.');
+    $this->assertSession()->responseContains('Update Backerymails entity base table in order to fix typo in table name.');
   }
 
   /**
