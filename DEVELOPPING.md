@@ -14,7 +14,7 @@ Drupal repo
 
 Github repo
   ```
-  git remote add github https://github.com/antistatique/drupal-backerymails.git
+  git remote add github git@github.com:antistatique/drupal-backerymails.git
   ```
 
 ## 🔧 Prerequisites
