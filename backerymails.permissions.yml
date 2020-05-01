@@ -1,2 +1,5 @@
 'administer backerymails':
   title: 'Administer Backery Mails'
+
+'delete mails backerymails':
+  title: 'Delete mails Backery Mails'

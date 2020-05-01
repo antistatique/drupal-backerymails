@@ -1,0 +1,27 @@
+<table>
+  <thead>
+    <tr>
+      <th>{{ 'Id'|t }}</th>
+      <th>{{ 'From'|t }}</th>
+      <th>{{ 'To'|t }}</th>
+      <th>{{ 'Reply to'|t }}</th>
+      <th>{{ 'Lang'|t }}</th>
+      <th>{{ 'Subject'|t }}</th>
+      <th>{{ 'Body'|t }}</th>
+      <th>{{ 'Sent at'|t }}</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>{{ variables.id.value }}</td>
+      <td>{{ variables.mail_from.value }}</td>
+      <td>{{ variables.mail_to.value }}</td>
+      <td>{{ variables.mail_reply_to.value }}</td>
+      <td>{{ variables.langcode.value }}</td>
+      <td>{{ variables.subject.value|raw }}</td>
+      <td>{{ variables.body.value|replace({'["': '', '"]': '', "\",\"": '', "\\/": "/"})|raw }}</td>
+      <td>{{ variables.created.value|date('Y-m-d H:i:s') }}</td>
+    <td>
+  </tbody>
+</table>

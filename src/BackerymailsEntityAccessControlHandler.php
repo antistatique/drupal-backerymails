@@ -24,7 +24,7 @@ class BackerymailsEntityAccessControlHandler extends EntityAccessControlHandler 
         return AccessResult::allowedIfHasPermission($account, 'administer backerymails');
 
       case 'delete':
-        return AccessResult::allowedIfHasPermission($account, 'administer backerymails');
+        return AccessResult::allowedIfHasPermission($account, 'delete mails backerymails');
     }
 
     // Unknown operation, no opinion.
