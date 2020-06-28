@@ -1,7 +1,7 @@
 CHANGELOG
 ---------
 
-## NEXT RELEASE
+## 8.x-2.0 (2020-06-28)
  - add travis integration
  - add styleci integration
  - replace drupal_ti by wengerk/drupal-for-contrib
