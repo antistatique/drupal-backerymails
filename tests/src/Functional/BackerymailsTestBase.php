@@ -10,6 +10,11 @@ use Drupal\Tests\BrowserTestBase;
 abstract class BackerymailsTestBase extends BrowserTestBase {
 
   /**
+   * {@inheritdoc}
+   */
+  protected $defaultTheme = 'stark';
+
+  /**
    * Finds link with specified locator.
    *
    * @param string $locator
