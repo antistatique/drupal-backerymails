@@ -53,6 +53,12 @@ class StorageTest extends KernelTestBase {
     $this->backerymailsStorage = $this->container->get('entity_type.manager')->getStorage('backerymails_entity');
 
     $this->container->get('config.factory')->getEditable('backerymails.settings')
+      ->set('reroute', [
+        'status'     => FALSE,
+        'recipients' => 'reroute@example.org',
+      ])->save();
+
+    $this->container->get('config.factory')->getEditable('backerymails.settings')
       ->set('excludes', [
         'customs'    => [],
         'sensitives' => [],
