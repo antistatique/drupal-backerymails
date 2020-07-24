@@ -9,6 +9,8 @@ use Drupal\Core\Database\Database;
 
 /**
  * Migrate data from the old existing Backerymails table to the new one.
+ *
+ * @see backerymails_update_8001()
  */
 function backerymails_post_update_8001_migrate_data(&$sandbox = NULL) {
   $database = Database::getConnection();
