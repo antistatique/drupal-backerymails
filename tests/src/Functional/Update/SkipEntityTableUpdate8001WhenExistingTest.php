@@ -7,7 +7,7 @@ use Drupal\Core\Database\Database;
 use Drupal\FunctionalTests\Update\UpdatePathTestBase;
 
 /**
- * Tests Backerymails entity base-table renamed and migrated.
+ * Ensure hook_update_8001 does not create error on fresh install with proper table name.
  *
  * @group backerymails
  * @group legacy
