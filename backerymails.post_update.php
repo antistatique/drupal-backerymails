@@ -9,12 +9,14 @@ use Drupal\Core\Database\Database;
 
 /**
  * Migrate data from the old existing Backerymails table to the new one.
+ *
+ * @see backerymails_update_8001()
  */
 function backerymails_post_update_8001_migrate_data(&$sandbox = NULL) {
   $database = Database::getConnection();
 
   if ($database->schema()->tableExists('backerymails_sended_mail') && $database->schema()->tableExists('backerymails_sent_mails')) {
-    $query  = $database->select('backerymails_sended_mail', 'sent_mails')
+    $query = $database->select('backerymails_sended_mail', 'sent_mails')
       ->fields('sent_mails');
 
     $backerymails_storage = \Drupal::service('entity_type.manager')->getStorage('backerymails_entity');

@@ -5,10 +5,10 @@
  * Contains backerymails.install.
  */
 
-use Drupal\Core\Field\BaseFieldDefinition;
-use Symfony\Component\Yaml\Yaml;
-use Drupal\Core\Url;
 use Drupal\Core\Database\Database;
+use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\Core\Url;
+use Symfony\Component\Yaml\Yaml;
 
 /**
  * Implements hook_install().
@@ -25,7 +25,7 @@ function backerymails_install() {
 }
 
 /**
- *  Implementions of hook_update_N().
+ * Implementions of hook_update_N().
  */
 
 /**

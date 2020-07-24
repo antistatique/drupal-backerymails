@@ -12,10 +12,10 @@ use Drupal\FunctionalTests\Update\UpdatePathTestBase;
  * @group backerymails
  * @group legacy
  *
- * @see backerymails_update_8001()
+ * @see backerymails_update_9003()
  * @see backerymails_post_update_migrate_data()
  */
-class RenameAndMigrateEntityTableUpdate8001Test extends UpdatePathTestBase {
+class RenameAndMigrateEntityTableUpdate9003Test extends UpdatePathTestBase {
 
   /**
    * {@inheritdoc}
@@ -26,26 +26,11 @@ class RenameAndMigrateEntityTableUpdate8001Test extends UpdatePathTestBase {
    * {@inheritdoc}
    */
   protected function setDatabaseDumpFiles() {
-    // This conditional allows tests to pass both before and after 8.8.x. The
-    // 8.4.0 fixtures were removed in 8.8.x.
-    // https://www.drupal.org/project/consumers/issues/3115996
-    // @todo: Remove this conditional after 8.7.x is no longer supported.
-
-    if (file_exists(DRUPAL_ROOT . '/core/modules/system/tests/fixtures/update/drupal-8.8.0.bare.standard.php.gz')) {
       $this->databaseDumpFiles = [
-        DRUPAL_ROOT . '/core/modules/system/tests/fixtures/update/drupal-8.8.0.bare.standard.php.gz',
-       __DIR__ . '/../../../fixtures/update/drupal-8.backerymails-installed.php',
-       __DIR__ . '/../../../fixtures/update/drupal-8.backerymails-entity-typos-8001.php',
-      ];
-    }
-    else {
-      $this->databaseDumpFiles = [
-        // @todo: Remove this fixture after 8.7 is no longer supported.
-        DRUPAL_ROOT . '/core/modules/system/tests/fixtures/update/drupal-8.bare.standard.php.gz',
+        DRUPAL_ROOT . '/core/modules/system/tests/fixtures/update/drupal-9.4.0.filled.standard.php.gz',
         __DIR__ . '/../../../fixtures/update/drupal-8.backerymails-installed.php',
-        __DIR__ . '/../../../fixtures/update/drupal-8.backerymails-entity-typos-8001.php',
+        __DIR__ . '/../../../fixtures/update/drupal-8.backerymails-entity-typos-9003.php',
       ];
-    }
   }
 
   /**
@@ -57,13 +42,13 @@ class RenameAndMigrateEntityTableUpdate8001Test extends UpdatePathTestBase {
   }
 
   /**
-   * Tests backerymails_update_8001().
+   * Tests backerymails_update_9003().
    *
    * Ensure every existing entries in the old table are migrated.
    *
-   * @see backerymails_update_8001()
+   * @see backerymails_update_9003()
    */
-  public function testUpdate8001() {
+  public function testUpdate9003() {
     $database = Database::getConnection();
 
     $this->assertFalse($database->schema()->tableExists('backerymails_sent_mails'));
@@ -91,7 +76,7 @@ class RenameAndMigrateEntityTableUpdate8001Test extends UpdatePathTestBase {
         'en',
         'backerymails.subject',
         'backerymails.body',
-        null,
+        NULL,
       ])
       ->execute();
     $this->assertEquals(1, $database->query('SELECT count(*) FROM {backerymails_sended_mail}')->fetchField());
