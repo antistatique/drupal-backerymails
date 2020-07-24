@@ -26,11 +26,26 @@ class RenameAndMigrateEntityTableUpdate8001Test extends UpdatePathTestBase {
    * {@inheritdoc}
    */
   protected function setDatabaseDumpFiles() {
-    $this->databaseDumpFiles = [
-      DRUPAL_ROOT . '/core/modules/system/tests/fixtures/update/drupal-8.bare.standard.php.gz',
-      __DIR__ . '/../../../fixtures/update/drupal-8.backerymails-installed.php',
-      __DIR__ . '/../../../fixtures/update/drupal-8.backerymails-entity-typos-8001.php',
-    ];
+    // This conditional allows tests to pass both before and after 8.8.x. The
+    // 8.4.0 fixtures were removed in 8.8.x.
+    // https://www.drupal.org/project/consumers/issues/3115996
+    // @todo: Remove this conditional after 8.7.x is no longer supported.
+
+    if (file_exists(DRUPAL_ROOT . '/core/modules/system/tests/fixtures/update/drupal-8.8.0.bare.standard.php.gz')) {
+      $this->databaseDumpFiles = [
+        DRUPAL_ROOT . '/core/modules/system/tests/fixtures/update/drupal-8.8.0.bare.standard.php.gz',
+       __DIR__ . '/../../../fixtures/update/drupal-8.backerymails-installed.php',
+       __DIR__ . '/../../../fixtures/update/drupal-8.backerymails-entity-typos-8001.php',
+      ];
+    }
+    else {
+      $this->databaseDumpFiles = [
+        // @todo: Remove this fixture after 8.7 is no longer supported.
+        DRUPAL_ROOT . '/core/modules/system/tests/fixtures/update/drupal-8.bare.standard.php.gz',
+        __DIR__ . '/../../../fixtures/update/drupal-8.backerymails-installed.php',
+        __DIR__ . '/../../../fixtures/update/drupal-8.backerymails-entity-typos-8001.php',
+      ];
+    }
   }
 
   /**
@@ -53,9 +68,7 @@ class RenameAndMigrateEntityTableUpdate8001Test extends UpdatePathTestBase {
 
     $this->assertFalse($database->schema()->tableExists('backerymails_sent_mails'));
     $this->assertTrue($database->schema()->tableExists('backerymails_sended_mail'));
-
-    $backerymails = BackerymailsEntity::loadMultiple();
-    $this->assertCount(0, $backerymails);
+    $this->assertEquals(0, $database->query('SELECT count(*) FROM {backerymails_sended_mail}')->fetchField());
 
     $database->insert('backerymails_sended_mail')
       ->fields([
@@ -81,7 +94,6 @@ class RenameAndMigrateEntityTableUpdate8001Test extends UpdatePathTestBase {
         null,
       ])
       ->execute();
-
     $this->assertEquals(1, $database->query('SELECT count(*) FROM {backerymails_sended_mail}')->fetchField());
 
     $this->runUpdates();

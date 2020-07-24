@@ -28,6 +28,8 @@ use Drupal\Core\Field\BaseFieldDefinition;
  *   admin_permission = "administer backerymails",
  *   entity_keys = {
  *     "id" = "id",
+ *     "label" = "subject",
+ *     "langcode" = "langcode",
  *   },
  *   links = {
  *     "canonical" = "/admin/config/backerymails/mails/{backerymails_entity}",
@@ -133,12 +135,6 @@ class BackerymailsEntity extends ContentEntityBase implements BackerymailsEntity
    */
   public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
     $fields = parent::baseFieldDefinitions($entity_type);
-
-    $fields['id'] = BaseFieldDefinition::create('integer')
-      ->setLabel(t('Entity ID'))
-      ->setDescription(t('The entity ID for this menu link content entity.'))
-      ->setReadOnly(TRUE)
-      ->setSetting('unsigned', TRUE);
 
     $fields['module'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Module'))
