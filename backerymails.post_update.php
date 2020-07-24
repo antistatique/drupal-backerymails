@@ -10,7 +10,7 @@ use Drupal\Core\Database\Database;
 /**
  * Migrate data from the old existing Backerymails table to the new one.
  */
-function backerymails_post_update_migrate_data(&$sandbox = NULL) {
+function backerymails_post_update_8001_migrate_data(&$sandbox = NULL) {
   $database = Database::getConnection();
 
   if ($database->schema()->tableExists('backerymails_sended_mail') && $database->schema()->tableExists('backerymails_sent_mails')) {
