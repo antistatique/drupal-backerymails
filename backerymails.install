@@ -7,6 +7,7 @@
 
 use Symfony\Component\Yaml\Yaml;
 use Drupal\Core\Url;
+use Drupal\Core\Database\Database;
 
 /**
  * Implements hook_install().
@@ -30,6 +31,14 @@ function backerymails_install() {
  * Update Backerymails entity base table in order to fix typo in table name.
  */
 function backerymails_update_8001() {
+  $database = Database::getConnection();
+
+  // Delete all old backerymails entity definition.
+  $database->delete('key_value')
+    ->condition('name', 'backerymails_entity.%', 'LIKE')
+    ->execute();
+
+  // Re-install the new entity that will generate a new table.
   $type_manager = \Drupal::entityTypeManager();
   $type_manager->clearCachedDefinitions();
   $entity_type = $type_manager->getDefinition('backerymails_entity');
