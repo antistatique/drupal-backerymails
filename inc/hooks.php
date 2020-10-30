@@ -47,9 +47,8 @@ function backerymails_mail_alter(&$message) {
   $excludes += $config->get('excludes')['sensitives'];
   // Get exclusion of customs mail(s) - to be skiped.
   $excludes = array_merge($excludes, $config->get('excludes')['customs']);
-  // Skip the saving for sensitives mail(s).
-  if (in_array($message['module'] . '.' . $message['key'], $excludes)) {
-    $message['send'] = FALSE;
+  // Skip the saving for sensitives mail(s) but still sent them.
+  if (in_array($message['module'] . '.' . $message['key'], $excludes, TRUE)) {
     return;
   }
 
