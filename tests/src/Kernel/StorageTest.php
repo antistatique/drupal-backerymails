@@ -91,7 +91,7 @@ class StorageTest extends KernelTestBase {
   }
 
   /**
-   * When the exclusion is filled, the mail should not be saved nor sent.
+   * When the exclusion is filled, the mail should not be stored but still sent.
    */
   public function testExclusionShouldNotStore() {
     $this->container->get('config.factory')->getEditable('backerymails.settings')
@@ -107,9 +107,21 @@ class StorageTest extends KernelTestBase {
     $saved_emails = $this->backerymailsStorage->loadMultiple();
     $this->assertCount(0, $saved_emails, 'No email was saved.');
 
-    // Ensure that there is no email in the captured emails array.
+    // Asserts sensitive excluded mails are still sent.
     $captured_emails = $this->getMails();
-    $this->assertCount(0, $captured_emails, 'No email was captured.');
+    self::assertCount(1, $captured_emails);
+    self::assertEquals('backerymails_test_test', $captured_emails[0]['id']);
+    self::assertEquals('admin@example.org', $captured_emails[0]['from']);
+    self::assertNull($captured_emails[0]['reply-to']);
+    self::assertSame([
+      'MIME-Version'              => '1.0',
+      'Content-Type'              => 'text/html; charset=UTF-8; format=flowed; delsp=yes',
+      'Content-Transfer-Encoding' => '8Bit',
+      'X-Mailer'                  => 'Drupal',
+      'Return-Path'               => 'admin@example.org',
+      'Sender'                    => 'admin@example.org',
+      'From'                      => ' <admin@example.org>',
+    ], $captured_emails[0]['headers']);
   }
 
 }

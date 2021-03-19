@@ -144,7 +144,7 @@ class ReroutingTest extends KernelTestBase {
   }
 
   /**
-   * When an email is exluded, it should then no more rerouted.
+   * When an email is excluded, it should then no more rerouted.
    */
   public function testExcludesShouldNotReroute() {
     $this->container->get('config.factory')->getEditable('backerymails.settings')

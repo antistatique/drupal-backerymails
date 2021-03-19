@@ -7,6 +7,7 @@ namespace Drupal\Tests\backerymails\Functional;
  *
  * @group backerymails_ui
  * @group backerymails
+ * @group backerymails_functional
  */
 class UiPageTest extends BackerymailsTestBase {
 

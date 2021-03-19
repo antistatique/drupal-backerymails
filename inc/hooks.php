@@ -12,6 +12,8 @@ use Drupal\backerymails\Entity\BackerymailsEntity;
  * Alter Drupal standard mail sender to trace the submission(s).
  *
  * Implements hook_mail_alter().
+ *
+ * @SuppressWarnings(PHPMD.DevelopmentCodeFragment)
  */
 function backerymails_mail_alter(&$message) {
   $config = \Drupal::config('backerymails.settings');
@@ -47,9 +49,8 @@ function backerymails_mail_alter(&$message) {
   $excludes += $config->get('excludes')['sensitives'];
   // Get exclusion of customs mail(s) - to be skiped.
   $excludes = array_merge($excludes, $config->get('excludes')['customs']);
-  // Skip the saving for sensitives mail(s).
-  if (in_array($message['module'] . '.' . $message['key'], $excludes)) {
-    $message['send'] = FALSE;
+  // Skip the saving for sensitives mail(s) but still sent them.
+  if (in_array($message['module'] . '.' . $message['key'], $excludes, TRUE)) {
     return;
   }
 
