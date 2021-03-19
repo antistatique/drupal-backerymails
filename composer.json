@@ -21,6 +21,12 @@
     }
   ],
   "license": "GPL-2.0-or-later",
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://packages.drupal.org/8"
+    }
+  ],
   "require-dev": {
     "drupal/coder": "^8.3.1"
   },
