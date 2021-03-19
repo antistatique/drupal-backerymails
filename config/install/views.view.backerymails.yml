@@ -10,9 +10,8 @@ label: Backerymails
 module: views
 description: Backerymails
 tag: backerymails
-base_table: backerymails_sended_mail
+base_table: backerymails_sent_mails
 base_field: id
-core: 8.x
 display:
   default:
     display_plugin: default
@@ -158,7 +157,7 @@ display:
       fields:
         id:
           id: id
-          table: backerymails_sended_mail
+          table: backerymails_sent_mails
           field: id
           relationship: none
           group_type: group
@@ -224,7 +223,7 @@ display:
           plugin_id: field
         created:
           id: created
-          table: backerymails_sended_mail
+          table: backerymails_sent_mails
           field: created
           relationship: none
           group_type: group
@@ -291,7 +290,7 @@ display:
           plugin_id: field
         module:
           id: module
-          table: backerymails_sended_mail
+          table: backerymails_sent_mails
           field: module
           relationship: none
           group_type: group
@@ -356,7 +355,7 @@ display:
           plugin_id: field
         module_key:
           id: module_key
-          table: backerymails_sended_mail
+          table: backerymails_sent_mails
           field: module_key
           relationship: none
           group_type: group
@@ -421,7 +420,7 @@ display:
           plugin_id: field
         mail_from:
           id: mail_from
-          table: backerymails_sended_mail
+          table: backerymails_sent_mails
           field: mail_from
           relationship: none
           group_type: group
@@ -486,14 +485,14 @@ display:
           plugin_id: field
         mail_to:
           id: mail_to
-          table: backerymails_sended_mail
+          table: backerymails_sent_mails
           field: mail_to
           entity_type: backerymails_entity
           entity_field: mail_to
           plugin_id: field
         mail_reply_to:
           id: mail_reply_to
-          table: backerymails_sended_mail
+          table: backerymails_sent_mails
           field: mail_reply_to
           relationship: none
           group_type: group
@@ -558,7 +557,7 @@ display:
           plugin_id: field
         langcode:
           id: langcode
-          table: backerymails_sended_mail
+          table: backerymails_sent_mails
           field: langcode
           relationship: none
           group_type: group
@@ -623,7 +622,7 @@ display:
           plugin_id: field
         subject:
           id: subject
-          table: backerymails_sended_mail
+          table: backerymails_sent_mails
           field: subject
           relationship: none
           group_type: group

@@ -5,7 +5,9 @@
  * Contains backerymails.install.
  */
 
+use Symfony\Component\Yaml\Yaml;
 use Drupal\Core\Url;
+use Drupal\Core\Database\Database;
 
 /**
  * Implements hook_install().
@@ -19,4 +21,33 @@ function backerymails_install() {
 
   $messenger = \Drupal::messenger();
   $messenger->addMessage(t('Backery Mails settings are available under <a href="@administer-page">Administer > Site configuration > Backery Mails</a>', ['@administer-page' => $url->toString()]));
+}
+
+/**
+ * Implementions of hook_update_N().
+ */
+
+/**
+ * Update Backerymails entity base table in order to fix typo in table name.
+ */
+function backerymails_update_8001() {
+  $database = Database::getConnection();
+
+  // Delete all old backerymails entity definition.
+  $database->delete('key_value')
+    ->condition('name', 'backerymails_entity.%', 'LIKE')
+    ->execute();
+
+  // Re-install the new entity that will generate a new table.
+  $type_manager = \Drupal::entityTypeManager();
+  $type_manager->clearCachedDefinitions();
+  $entity_type = $type_manager->getDefinition('backerymails_entity');
+  \Drupal::entityDefinitionUpdateManager()->installEntityType($entity_type);
+
+  // Update the existing backerymails views with the new base-table.
+  $config_path = drupal_get_path('module', 'backerymails') . '/config/install/views.view.backerymails.yml';
+  $data = Yaml::parse(file_get_contents($config_path));
+  \Drupal::configFactory()->getEditable('views.view.backerymails')->setData($data)->save(TRUE);
+
+  return t('Backerymails base-table entity has been updated.');
 }

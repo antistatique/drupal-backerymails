@@ -24,10 +24,12 @@ use Drupal\Core\Entity\EntityTypeInterface;
  *     },
  *     "access" = "Drupal\backerymails\BackerymailsEntityAccessControlHandler",
  *   },
- *   base_table = "backerymails_sended_mail",
+ *   base_table = "backerymails_sent_mails",
  *   admin_permission = "administer backerymails",
  *   entity_keys = {
  *     "id" = "id",
+ *     "label" = "subject",
+ *     "langcode" = "langcode",
  *   },
  *   links = {
  *     "canonical" = "/admin/config/backerymails/mails/{backerymails_entity}",
@@ -134,12 +136,6 @@ class BackerymailsEntity extends ContentEntityBase implements BackerymailsEntity
   public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
     $fields = parent::baseFieldDefinitions($entity_type);
 
-    $fields['id'] = BaseFieldDefinition::create('integer')
-      ->setLabel(t('Entity ID'))
-      ->setDescription(t('The entity ID for this menu link content entity.'))
-      ->setReadOnly(TRUE)
-      ->setSetting('unsigned', TRUE);
-
     $fields['module'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Module'))
       ->setDescription(t('The module that send the mail.'));
@@ -159,11 +155,6 @@ class BackerymailsEntity extends ContentEntityBase implements BackerymailsEntity
     $fields['mail_reply_to'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Reply-to'))
       ->setDescription(t('The reply-to(s) of the mail.'));
-
-    $fields['langcode'] = BaseFieldDefinition::create('string')
-      ->setLabel(t('Langcode'))
-      ->setSetting('max_length', 12)
-      ->setDescription(t('The langcode of the mail.'));
 
     $fields['subject'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Subject'))
