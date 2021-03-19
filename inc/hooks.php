@@ -12,6 +12,8 @@ use Drupal\backerymails\Entity\BackerymailsEntity;
  * Alter Drupal standard mail sender to trace the submission(s).
  *
  * Implements hook_mail_alter().
+ *
+ * @SuppressWarnings(PHPMD.DevelopmentCodeFragment)
  */
 function backerymails_mail_alter(&$message) {
   $config = \Drupal::config('backerymails.settings');
