@@ -14,7 +14,7 @@ class UiPageTest extends BackerymailsTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['backerymails'];
+  protected static $modules = ['backerymails'];
 
   /**
    * We use the minimal profile because we want to test local action links.
@@ -26,7 +26,7 @@ class UiPageTest extends BackerymailsTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     // Create a user for tests.
