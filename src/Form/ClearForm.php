@@ -79,7 +79,7 @@ class ClearForm extends ConfirmFormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $result = $this->entityBackerymails->getQuery()->execute();
+    $result = $this->entityBackerymails->getQuery()->accessCheck(TRUE)->execute();
     $entities = $this->entityBackerymails->loadMultiple($result);
     $this->entityBackerymails->delete($entities);
     $this->messenger()->addMessage($this->t("All backerymails entries have been deleted."));

@@ -29,9 +29,16 @@ class ReroutingTest extends KernelTestBase {
   protected $backerymailsStorage;
 
   /**
+   * The current Drupal version.
+   *
+   * @var array
+   */
+  protected $drupalVersion;
+
+  /**
    * {@inheritdoc}
    */
-  public static $modules = [
+  protected static $modules = [
     'system',
     'text',
     'backerymails',
@@ -41,7 +48,7 @@ class ReroutingTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     // Set the System Site mail.
@@ -63,6 +70,9 @@ class ReroutingTest extends KernelTestBase {
         'customs'    => [],
         'sensitives' => [],
       ])->save();
+
+    require_once DRUPAL_ROOT . '/core/includes/install.core.inc';
+    $this->drupalVersion = _install_get_version_info(\Drupal::VERSION);
   }
 
   /**
@@ -89,16 +99,31 @@ class ReroutingTest extends KernelTestBase {
     $this->assertEquals('backerymails_test_test', $captured_email['id']);
     $this->assertEquals('admin@example.org', $captured_email['from']);
     $this->assertNull($captured_email['reply-to']);
-    $this->assertSame([
-      'MIME-Version'              => "1.0",
-      'Content-Type'              => "text/html; charset=UTF-8; format=flowed; delsp=yes",
-      'Content-Transfer-Encoding' => "8Bit",
-      'X-Mailer'                  => "Drupal",
-      'Return-Path'               => 'admin@example.org',
-      'Sender'                    => 'admin@example.org',
-      'From'                      => ' <admin@example.org>',
-      'X-Backerymails-To'         => "foobar@example.org",
-    ], $captured_email['headers']);
+
+    if ($this->drupalVersion['major'] == 9 && $this->drupalVersion['minor'] >= 2) {
+      $this->assertSame([
+        'MIME-Version'              => "1.0",
+        'Content-Type'              => "text/html; charset=UTF-8; format=flowed; delsp=yes",
+        'Content-Transfer-Encoding' => "8Bit",
+        'X-Mailer'                  => "Drupal",
+        'Return-Path'               => 'admin@example.org',
+        'Sender'                    => 'admin@example.org',
+        'From'                      => 'admin@example.org',
+        'X-Backerymails-To'         => "foobar@example.org",
+      ], $captured_email['headers']);
+    }
+    else {
+      $this->assertSame([
+        'MIME-Version'              => "1.0",
+        'Content-Type'              => "text/html; charset=UTF-8; format=flowed; delsp=yes",
+        'Content-Transfer-Encoding' => "8Bit",
+        'X-Mailer'                  => "Drupal",
+        'Return-Path'               => 'admin@example.org',
+        'Sender'                    => 'admin@example.org',
+        'From'                      => ' <admin@example.org>',
+        'X-Backerymails-To'         => "foobar@example.org",
+      ], $captured_email['headers']);
+    }
   }
 
   /**
@@ -131,16 +156,31 @@ class ReroutingTest extends KernelTestBase {
     $this->assertEquals('backerymails_test_test', $captured_email['id']);
     $this->assertEquals('admin@example.org', $captured_email['from']);
     $this->assertNull($captured_email['reply-to']);
-    $this->assertSame([
-      'MIME-Version'              => "1.0",
-      'Content-Type'              => "text/html; charset=UTF-8; format=flowed; delsp=yes",
-      'Content-Transfer-Encoding' => "8Bit",
-      'X-Mailer'                  => "Drupal",
-      'Return-Path'               => 'admin@example.org',
-      'Sender'                    => 'admin@example.org',
-      'From'                      => ' <admin@example.org>',
-      'X-Backerymails-To'         => "foobar@example.org,bar@example.org",
-    ], $captured_email['headers']);
+
+    if ($this->drupalVersion['major'] == 9 && $this->drupalVersion['minor'] >= 2) {
+      $this->assertEquals([
+        'MIME-Version'              => "1.0",
+        'Content-Type'              => "text/html; charset=UTF-8; format=flowed; delsp=yes",
+        'Content-Transfer-Encoding' => "8Bit",
+        'X-Mailer'                  => "Drupal",
+        'Return-Path'               => 'admin@example.org',
+        'Sender'                    => 'admin@example.org',
+        'From'                      => 'admin@example.org',
+        'X-Backerymails-To'         => "foobar@example.org,bar@example.org",
+      ], $captured_email['headers']);
+    }
+    else {
+      $this->assertEquals([
+        'MIME-Version'              => "1.0",
+        'Content-Type'              => "text/html; charset=UTF-8; format=flowed; delsp=yes",
+        'Content-Transfer-Encoding' => "8Bit",
+        'X-Mailer'                  => "Drupal",
+        'Return-Path'               => 'admin@example.org',
+        'Sender'                    => 'admin@example.org',
+        'From'                      => ' <admin@example.org>',
+        'X-Backerymails-To'         => "foobar@example.org,bar@example.org",
+      ], $captured_email['headers']);
+    }
   }
 
   /**
@@ -186,18 +226,35 @@ class ReroutingTest extends KernelTestBase {
     $this->assertEquals('backerymails_test_test', $captured_email['id']);
     $this->assertEquals('admin@example.org', $captured_email['from']);
     $this->assertNull($captured_email['reply-to']);
-    $this->assertEquals([
-      'MIME-Version'              => "1.0",
-      'Content-Type'              => "text/html; charset=UTF-8; format=flowed; delsp=yes",
-      'Content-Transfer-Encoding' => "8Bit",
-      'X-Mailer'                  => "Drupal",
-      'Return-Path'               => 'admin@example.org',
-      'Sender'                    => 'admin@example.org',
-      'From'                      => ' <admin@example.org>',
-      'Cc'                        => 'reroute@example.org',
-      'X-Backerymails-To'         => 'foobar@example.org',
-      'X-Backerymails-Cc'         => 'cc@example.org',
-    ], $captured_email['headers']);
+
+    if ($this->drupalVersion['major'] == 9 && $this->drupalVersion['minor'] >= 2) {
+      $this->assertEquals([
+        'MIME-Version'              => "1.0",
+        'Content-Type'              => "text/html; charset=UTF-8; format=flowed; delsp=yes",
+        'Content-Transfer-Encoding' => "8Bit",
+        'X-Mailer'                  => "Drupal",
+        'Return-Path'               => 'admin@example.org',
+        'Sender'                    => 'admin@example.org',
+        'From'                      => 'admin@example.org',
+        'Cc'                        => 'reroute@example.org',
+        'X-Backerymails-To'         => 'foobar@example.org',
+        'X-Backerymails-Cc'         => 'cc@example.org',
+      ], $captured_email['headers']);
+    }
+    else {
+      $this->assertEquals([
+        'MIME-Version'              => "1.0",
+        'Content-Type'              => "text/html; charset=UTF-8; format=flowed; delsp=yes",
+        'Content-Transfer-Encoding' => "8Bit",
+        'X-Mailer'                  => "Drupal",
+        'Return-Path'               => 'admin@example.org',
+        'Sender'                    => 'admin@example.org',
+        'From'                      => ' <admin@example.org>',
+        'Cc'                        => 'reroute@example.org',
+        'X-Backerymails-To'         => 'foobar@example.org',
+        'X-Backerymails-Cc'         => 'cc@example.org',
+      ], $captured_email['headers']);
+    }
   }
 
   /**
@@ -225,18 +282,35 @@ class ReroutingTest extends KernelTestBase {
     $this->assertEquals('backerymails_test_test', $captured_email['id']);
     $this->assertEquals('admin@example.org', $captured_email['from']);
     $this->assertNull($captured_email['reply-to']);
-    $this->assertEquals([
-      'MIME-Version'              => "1.0",
-      'Content-Type'              => "text/html; charset=UTF-8; format=flowed; delsp=yes",
-      'Content-Transfer-Encoding' => "8Bit",
-      'X-Mailer'                  => "Drupal",
-      'Return-Path'               => 'admin@example.org',
-      'Sender'                    => 'admin@example.org',
-      'From'                      => ' <admin@example.org>',
-      'Bcc'                       => 'reroute@example.org',
-      'X-Backerymails-To'         => 'foobar@example.org',
-      'X-Backerymails-Bcc'        => 'bcc@example.org',
-    ], $captured_email['headers']);
+
+    if ($this->drupalVersion['major'] == 9 && $this->drupalVersion['minor'] >= 2) {
+      $this->assertEquals([
+        'MIME-Version'              => "1.0",
+        'Content-Type'              => "text/html; charset=UTF-8; format=flowed; delsp=yes",
+        'Content-Transfer-Encoding' => "8Bit",
+        'X-Mailer'                  => "Drupal",
+        'Return-Path'               => 'admin@example.org',
+        'Sender'                    => 'admin@example.org',
+        'From'                      => 'admin@example.org',
+        'Bcc'                       => 'reroute@example.org',
+        'X-Backerymails-To'         => 'foobar@example.org',
+        'X-Backerymails-Bcc'        => 'bcc@example.org',
+      ], $captured_email['headers']);
+    }
+    else {
+      $this->assertEquals([
+        'MIME-Version'              => "1.0",
+        'Content-Type'              => "text/html; charset=UTF-8; format=flowed; delsp=yes",
+        'Content-Transfer-Encoding' => "8Bit",
+        'X-Mailer'                  => "Drupal",
+        'Return-Path'               => 'admin@example.org',
+        'Sender'                    => 'admin@example.org',
+        'From'                      => ' <admin@example.org>',
+        'Bcc'                       => 'reroute@example.org',
+        'X-Backerymails-To'         => 'foobar@example.org',
+        'X-Backerymails-Bcc'        => 'bcc@example.org',
+      ], $captured_email['headers']);
+    }
   }
 
   /**

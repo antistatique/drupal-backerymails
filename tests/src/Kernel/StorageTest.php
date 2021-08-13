@@ -29,9 +29,16 @@ class StorageTest extends KernelTestBase {
   protected $backerymailsStorage;
 
   /**
+   * The current Drupal version.
+   *
+   * @var array
+   */
+  protected $drupalVersion;
+
+  /**
    * {@inheritdoc}
    */
-  public static $modules = [
+  protected static $modules = [
     'system',
     'text',
     'backerymails',
@@ -41,7 +48,7 @@ class StorageTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     // Set the System Site mail.
@@ -63,6 +70,9 @@ class StorageTest extends KernelTestBase {
         'customs'    => [],
         'sensitives' => [],
       ])->save();
+
+    require_once DRUPAL_ROOT . '/core/includes/install.core.inc';
+    $this->drupalVersion = _install_get_version_info(\Drupal::VERSION);
   }
 
   /**
@@ -113,15 +123,29 @@ class StorageTest extends KernelTestBase {
     self::assertEquals('backerymails_test_test', $captured_emails[0]['id']);
     self::assertEquals('admin@example.org', $captured_emails[0]['from']);
     self::assertNull($captured_emails[0]['reply-to']);
-    self::assertSame([
-      'MIME-Version'              => '1.0',
-      'Content-Type'              => 'text/html; charset=UTF-8; format=flowed; delsp=yes',
-      'Content-Transfer-Encoding' => '8Bit',
-      'X-Mailer'                  => 'Drupal',
-      'Return-Path'               => 'admin@example.org',
-      'Sender'                    => 'admin@example.org',
-      'From'                      => ' <admin@example.org>',
-    ], $captured_emails[0]['headers']);
+
+    if ($this->drupalVersion['major'] == 9 && $this->drupalVersion['minor'] >= 2) {
+      self::assertSame([
+        'MIME-Version'              => '1.0',
+        'Content-Type'              => 'text/html; charset=UTF-8; format=flowed; delsp=yes',
+        'Content-Transfer-Encoding' => '8Bit',
+        'X-Mailer'                  => 'Drupal',
+        'Return-Path'               => 'admin@example.org',
+        'Sender'                    => 'admin@example.org',
+        'From'                      => 'admin@example.org',
+      ], $captured_emails[0]['headers']);
+    }
+    else {
+      self::assertSame([
+        'MIME-Version'              => '1.0',
+        'Content-Type'              => 'text/html; charset=UTF-8; format=flowed; delsp=yes',
+        'Content-Transfer-Encoding' => '8Bit',
+        'X-Mailer'                  => 'Drupal',
+        'Return-Path'               => 'admin@example.org',
+        'Sender'                    => 'admin@example.org',
+        'From'                      => ' <admin@example.org>',
+      ], $captured_emails[0]['headers']);
+    }
   }
 
 }
