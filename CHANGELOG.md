@@ -2,6 +2,8 @@ CHANGELOG
 ---------
 
 ## NEXT RELEASE
+
+## 8.x-2.1 (2021-08-13)
  - fix Issue #3168259 by wengerk, Aerzas: Excluded sensitive e-mails are not sent
 
 ## 8.x-2.0 (2020-06-28)
