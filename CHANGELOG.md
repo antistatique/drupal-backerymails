@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - fix phpcs null coalesce operator instead of ternary operator
 
 ### Removed
+- remove satackey/action-docker-layer-caching on Github Actions
 - remove trigger github actions on every pull-request, keep only push
 
 ## [2.1.0] - 2021-08-13
