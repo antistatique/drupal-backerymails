@@ -75,7 +75,7 @@ function backerymails_mail_alter(&$message) {
       '@subject' => $subject,
       '@from'    => $message['from'],
       '@to'      => $message['to'],
-      '@reply'   => isset($message['reply_to']) ? $message['reply_to'] : NULL,
+      '@reply'   => $message['reply_to'] ?? NULL,
       '@header'  => $header_output,
       '@body'    => $body,
     ]);
@@ -88,8 +88,8 @@ function backerymails_mail_alter(&$message) {
     'module_key'    => $message['key'],
     'mail_from'     => $message['from'],
     'mail_to'       => $message['to'],
-    'mail_reply_to' => isset($message['reply-to']) ? $message['reply-to'] : NULL,
-    'langcode'      => isset($message['langcode']) ? $message['langcode'] : NULL,
+    'mail_reply_to' => $message['reply-to'] ?? NULL,
+    'langcode'      => $message['langcode'] ?? NULL,
     'subject'       => $subject,
     'body'          => $body,
   ];
