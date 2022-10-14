@@ -3,6 +3,9 @@ FROM wengerk/drupal-for-contrib:${BASE_IMAGE_TAG}
 
 ENV COMPOSER_MEMORY_LIMIT=-1
 
+# Disable deprecation notice because supporting both Drupal 8 & Drupal 9.
+ENV SYMFONY_DEPRECATIONS_HELPER=disabled
+
 # Install drupal/mailsystem as required by the module
 RUN composer require drupal/mailsystem:~4.3
 

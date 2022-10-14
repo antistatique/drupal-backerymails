@@ -7,9 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Changed
 - update changelog form to follow keep-a-changelog format
+- disable deprecation notice PHPUnit
 
 ### Fixed
 - fix phpcs null coalesce operator instead of ternary operator
+- fixed docker test on CI race-condition database note ready
+
+### Removed
+- remove satackey/action-docker-layer-caching on Github Actions
+- remove trigger github actions on every pull-request, keep only push
 
 ## [2.1.0] - 2021-08-13
 ### Fixed
