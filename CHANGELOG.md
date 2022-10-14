@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - update changelog form to follow keep-a-changelog format
 - disable deprecation notice PHPUnit
+- drop support of drupal 8.8 & 8.9
 
 ### Fixed
 - fix phpcs null coalesce operator instead of ternary operator
