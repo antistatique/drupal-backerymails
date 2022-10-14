@@ -1,38 +1,63 @@
-CHANGELOG
----------
+# Changelog
+All notable changes to this project will be documented in this file.
 
-## NEXT RELEASE
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 8.x-2.1 (2021-08-13)
- - fix Issue #3168259 by wengerk, Aerzas: Excluded sensitive e-mails are not sent
+## [Unreleased]
+### Changed
+- update changelog form to follow keep-a-changelog format
 
-## 8.x-2.0 (2020-06-28)
- - add travis integration
- - add styleci integration
- - replace drupal_ti by wengerk/drupal-for-contrib
- - fix email authors - Main Support
- - fix Issue #3035541 by chipway: Wrong Dependency prefix in .info.yml
- - fix Issue #3038518 by wengerk: [8.6.x] - Cleanup deprecation notice
- - fix Issue #3044923 by wengerk: Composer require failure - Drupal 8.7.x+
- - fix Issue #3079686: Add support to reroute Cc and Bcc headers
- - fix Issue #3090759: fix Travis tests and Mailsystem - deprecation notices
- - fix Issue #3090766: Drupal 9 Readiness 
+## [2.1.0] - 2021-08-13
+### Fixed
+- fix Issue #3168259 by wengerk, Aerzas: Excluded sensitive e-mails are not sent
 
-## 8.x-1.3 (2018-02-09)
- - fix #2938562 - First install throw error `Route "backerymails.settings" does not exist.`
- - fix #2925147 by gido, Nachini, wengerk: I cannot "Delete all"
- - fix typo 'sended' -> 'sent'
- - add custom HEADER to store original recipient when rerouted
- - fix issue that prevent sensitives mails to be rerouted
+## [2.0.0] - (2020-06-28)
+### Added
+- add travis integration
+- add styleci integration
+- replace drupal_ti by wengerk/drupal-for-contrib
 
-## 8.x-1.2 (2017-01-11)
- - fix the install issue (missing URL)
- - add BrowserTest
- - add Configuration Schema file
+### Fixed
+- fix email authors - Main Support
+- fix Issue #3035541 by chipway: Wrong Dependency prefix in .info.yml
+- fix Issue #3038518 by wengerk: \[8.6.x] - Cleanup deprecation notice
+- fix Issue #3044923 by wengerk: Composer require failure - Drupal 8.7.x+
+- fix Issue #3079686: Add support to reroute Cc and Bcc headers
+- fix Issue #3090759: fix Travis tests and Mailsystem - deprecation notices
+- fix Issue #3090766: Drupal 9 Readiness
 
-## 8.x-1.1 (2017-03-10)
- - customs module.key exclusions
- - entity action to clear all entries
+## [1.3.0] - (2018-02-09)
+### Added
+- add custom HEADER to store original recipient when rerouted
 
-## 8.x-1.0 (2017-03-10)
- - release
+### Fixed
+- fix #2938562 - First install throw error `Route "backerymails.settings" does not exist.`
+- fix #2925147 by gido, Nachini, wengerk: I cannot "Delete all"
+- fix typo 'sended' -> 'sent'
+- fix issue that prevent sensitives mails to be rerouted
+
+## [1.2.0] - (2017-01-11)
+### Added
+- add BrowserTest
+- add Configuration Schema file
+
+### Fixed
+- fix the install issue (missing URL)
+
+## [1.1.0] - (2017-03-10)
+### Added
+- customs module.key exclusions
+- entity action to clear all entries
+
+## [1.0.0] - (2017-03-10)
+### Added
+- release
+
+[Unreleased]: https://github.com/antistatique/drupal-backerymails/compare/8.x-2.1...HEAD
+[2.1.0]: https://github.com/antistatique/drupal-backerymails/compare/8.x-2.0...8.x-2.1
+[2.0.0]: https://github.com/antistatique/drupal-backerymails/compare/8.x-1.3...8.x-2.0
+[1.3.0]: https://github.com/antistatique/drupal-backerymails/compare/8.x-1.2...8.x-1.3
+[1.2.0]: https://github.com/antistatique/drupal-backerymails/compare/8.x-1.1...8.x-1.2
+[1.1.0]: https://github.com/antistatique/drupal-backerymails/compare/8.x-1.0...8.x-1.1
+[1.0.0]: https://github.com/antistatique/drupal-backerymails/releases/tag/8.x-1.0
