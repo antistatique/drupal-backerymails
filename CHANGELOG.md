@@ -11,6 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - fix phpcs null coalesce operator instead of ternary operator
 
+### Removed
+- remove trigger github actions on every pull-request, keep only push
+
 ## [2.1.0] - 2021-08-13
 ### Fixed
 - fix Issue #3168259 by wengerk, Aerzas: Excluded sensitive e-mails are not sent
