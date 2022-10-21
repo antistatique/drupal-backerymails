@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [2.2.0] - 2022-10-21
 ### Added
 - add coverage for Drupal 9.3, 9.4 & 9.5
 - add upgrade-status check
@@ -68,7 +70,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - release
 
-[Unreleased]: https://github.com/antistatique/drupal-backerymails/compare/8.x-2.1...HEAD
+[Unreleased]: https://github.com/antistatique/drupal-backerymails/compare/8.x-2.2...HEAD
+[2.2.0]: https://github.com/antistatique/drupal-backerymails/compare/8.x-2.1...8.x-2.2
 [2.1.0]: https://github.com/antistatique/drupal-backerymails/compare/8.x-2.0...8.x-2.1
 [2.0.0]: https://github.com/antistatique/drupal-backerymails/compare/8.x-1.3...8.x-2.0
 [1.3.0]: https://github.com/antistatique/drupal-backerymails/compare/8.x-1.2...8.x-1.3
