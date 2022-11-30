@@ -6,6 +6,7 @@ use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityChangedTrait;
 use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 
 /**
  * Defines the Backerymails entity entity.
@@ -18,7 +19,6 @@ use Drupal\Core\Entity\EntityTypeInterface;
  *   handlers = {
  *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
  *     "views_data" = "Drupal\backerymails\Entity\BackerymailsViewsData",
- *
  *     "form" = {
  *       "default" = "Drupal\Core\Entity\ContentEntityForm",
  *     },
@@ -135,47 +135,51 @@ class BackerymailsEntity extends ContentEntityBase implements BackerymailsEntity
     $fields = parent::baseFieldDefinitions($entity_type);
 
     $fields['id'] = BaseFieldDefinition::create('integer')
-      ->setLabel(t('Entity ID'))
-      ->setDescription(t('The entity ID for this menu link content entity.'))
+      ->setLabel(new TranslatableMarkup('Entity ID'))
+      ->setDescription(new TranslatableMarkup('The entity ID for this menu link content entity.'))
       ->setReadOnly(TRUE)
       ->setSetting('unsigned', TRUE);
 
     $fields['module'] = BaseFieldDefinition::create('string')
-      ->setLabel(t('Module'))
-      ->setDescription(t('The module that send the mail.'));
+      ->setLabel(new TranslatableMarkup('Module'))
+      ->setDescription(new TranslatableMarkup('The module that send the mail.'));
 
     $fields['module_key'] = BaseFieldDefinition::create('string')
-      ->setLabel(t('Key'))
-      ->setDescription(t('The key of the mail, concording to the module.'));
+      ->setLabel(new TranslatableMarkup('Key'))
+      ->setDescription(new TranslatableMarkup('The key of the mail, concording to the module.'));
 
     $fields['mail_from'] = BaseFieldDefinition::create('string')
-      ->setLabel(t('From'))
-      ->setDescription(t('The sender of the mail.'));
+      ->setLabel(new TranslatableMarkup('From'))
+      ->setDescription(new TranslatableMarkup('The sender of the mail.'));
 
     $fields['mail_to'] = BaseFieldDefinition::create('string')
-      ->setLabel(t('To'))
-      ->setDescription(t('The recipient(s) of the mail.'));
+      ->setLabel(new TranslatableMarkup('To'))
+      ->setDescription(new TranslatableMarkup('The recipient(s) of the mail.'));
 
     $fields['mail_reply_to'] = BaseFieldDefinition::create('string')
-      ->setLabel(t('Reply-to'))
-      ->setDescription(t('The reply-to(s) of the mail.'));
+      ->setLabel(new TranslatableMarkup('Reply-to'))
+      ->setDescription(new TranslatableMarkup('The reply-to(s) of the mail.'));
 
     $fields['langcode'] = BaseFieldDefinition::create('string')
-      ->setLabel(t('Langcode'))
+      ->setLabel(new TranslatableMarkup('Langcode'))
       ->setSetting('max_length', 12)
-      ->setDescription(t('The langcode of the mail.'));
+      ->setDescription(new TranslatableMarkup('The langcode of the mail.'));
 
     $fields['subject'] = BaseFieldDefinition::create('string')
-      ->setLabel(t('Subject'))
-      ->setDescription(t('The subject of the mail.'));
+      ->setLabel(new TranslatableMarkup('Subject'))
+      ->setDescription(new TranslatableMarkup('The subject of the mail.'));
 
     $fields['body'] = BaseFieldDefinition::create('text_long')
-      ->setLabel(t('Body'))
-      ->setDescription(t('The body of the mail.'));
+      ->setLabel(new TranslatableMarkup('Body'))
+      ->setDescription(new TranslatableMarkup('The body of the mail.'));
 
     $fields['created'] = BaseFieldDefinition::create('created')
-      ->setLabel(t('Created'))
-      ->setDescription(t('The time that the entity was created.'));
+      ->setLabel(new TranslatableMarkup('Created'))
+      ->setDescription(new TranslatableMarkup('The time that the entity was created.'));
+
+    $fields['changed'] = BaseFieldDefinition::create('changed')
+    ->setLabel(new TranslatableMarkup('Changed'))
+    ->setDescription(new TranslatableMarkup('Changed'));
 
     return $fields;
   }
