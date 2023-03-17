@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Removed
 - drop support of drupal below 9.4.x
+- remove tests condition to maintain compatibility below Drupal 9.2
 
 ### Added
 - add dependabot for Github Action dependency
