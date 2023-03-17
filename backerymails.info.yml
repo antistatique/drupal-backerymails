@@ -2,7 +2,7 @@ name: Backery Mails
 description: 'Save every going out mails using the MailManagerInterface & provides a user interface to retrieve them.'
 package: 'Mail'
 type: module
-core_version_requirement: ^9.4
+core_version_requirement: ^9.4 || ^10
 
 dependencies:
   - drupal:views
