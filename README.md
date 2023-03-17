@@ -25,25 +25,23 @@ Backerymails is awesome because it merges every must-have features about mails s
 
 Backerymails can do a lot more than that, but those are some of the obvious uses of Backerymails.
 
-## Backerymails versions
+## Versions
 
-The version `8.x-1.x` is not compatible with Drupal `8.8.x`.
-Drupal `8.8.x` brings some breaking change with tests and so you
-must upgrade to `8.x-2.x` version of **Backerymails**.
-
-The version `8.x-3.x` is not compatible with Drupal `8.x` and will only support Drupal `9.x` Drupal `10.x`.
+This module works on Drupal 8, Drupal 9 & Drupal 10 !
 
 ## Which version should I use?
 
-|Drupal Core| Backerymails |
-|:---------:|:------------:|
-|8.7.x      |     1.x      |
-|8.8.x      |     2.x      |
-|9.x        |  2.x - 3.x   |
+|Drupal Core | Backerymails |
+|:----------:|:------------:|
+|   8.7.x    |     1.x      |
+|    8.x     |     2.x      |
+|   9.3.x    |    2.2.x     |
+|    9.x     |  2.x - 3.x   |
+|    10.x    |     3.x      |
 
 ## Dependencies
 
-The Drupal 8 & Drupal 9 version of Backerymails requires [Views](https://www.drupal.org/project/views) and [Mail System](https://www.drupal.org/project/mailsystem).
+The Drupal 8, Drupal 9 & Drupal 10 version of Backerymails requires [Views](https://www.drupal.org/project/views) and [Mail System](https://www.drupal.org/project/mailsystem).
 
 ## Similar modules
 

@@ -2,7 +2,7 @@ name: Backery Mails test
 description: Support module for Backery Mails testing.
 package: Testing
 type: module
-core_version_requirement: ^8.8 || ^9
+core_version_requirement: ^9.4
 
 dependencies:
   - backerymails:backerymails
