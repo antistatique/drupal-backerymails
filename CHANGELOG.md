@@ -83,7 +83,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - release
 
 [Unreleased]: https://github.com/antistatique/drupal-backerymails/compare/3.0.0...HEAD
-[3.0.0]: https://github.com/antistatique/drupal-backerymails/compare//8.x-2.2...3.0.0
+[3.0.0]: https://github.com/antistatique/drupal-backerymails/compare/8.x-2.2...3.0.0
 [2.2.0]: https://github.com/antistatique/drupal-backerymails/compare/8.x-2.1...8.x-2.2
 [2.1.0]: https://github.com/antistatique/drupal-backerymails/compare/8.x-2.0...8.x-2.1
 [2.0.0]: https://github.com/antistatique/drupal-backerymails/compare/8.x-1.3...8.x-2.0
