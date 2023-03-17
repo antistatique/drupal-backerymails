@@ -12,6 +12,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - add dependabot for Github Action dependency
 - add official support of drupal 9.5 & 10.0
 
+### Changed
+- re-enable PHPUnit Symfony Deprecation notice
+
 ## [2.2.0] - 2022-10-21
 ### Added
 - add coverage for Drupal 9.3, 9.4 & 9.5
