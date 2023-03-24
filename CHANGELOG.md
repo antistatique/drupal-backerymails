@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Fixed
+- fix Backerymail entity canonical routing - Issue #3171878: Drupal\Core\Entity\EntityStorageException: Route "entity.backerymails_entity.canonical" does not exist
+
 ### Added
 - add Backerymail entity 'changed' field
 

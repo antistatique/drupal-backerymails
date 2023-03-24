@@ -75,6 +75,40 @@ class UiPageTest extends BackerymailsTestBase {
   }
 
   /**
+   * Tests the canonical page of a backerymails entity.
+   *
+   * Verifies the canonical page defined as handlers:view_builder on annotation.
+   *
+   * @ConfigEntityType on \Drupal\backerymails\Entity\BackerymailsEntity.
+   * works.
+   *
+   * @group kevin
+   */
+  public function testCanonicalPage() {
+    $backerymail = $this->container->get('entity_type.manager')->getStorage('backerymails_entity')
+      ->create([
+        'module' => 'backerymails.module',
+        'module_key' => 'backerymails.module_key',
+        'mail_from' => 'backerymails.mail_from',
+        'mail_to' => 'backerymails.mail_to',
+        'mail_reply_to' => 'backerymails.mail_reply_to',
+        'langcode' => 'en',
+        'subject' => 'backerymails.subject',
+        'body' => 'backerymails.body',
+      ]);
+    $backerymail->save();
+
+    // Canonical page must works and return 200 for Admin logged-in user.
+    $this->drupalGet("admin/config/backerymails/mails/{$backerymail->id()}");
+    $this->assertSession()->statusCodeEquals(200);
+
+    // Ensure canonical access require to be logged-in.
+    $this->drupalLogout();
+    $this->drupalGet("admin/config/backerymails/mails/{$backerymail->id()}");
+    $this->assertSession()->statusCodeEquals(403);
+  }
+
+  /**
    * Tests that clean works.
    */
   public function testClear() {
