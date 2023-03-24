@@ -5,6 +5,7 @@
  * Contains backerymails.install.
  */
 
+use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Url;
 
 /**
@@ -20,3 +21,17 @@ function backerymails_install() {
   $messenger = \Drupal::messenger();
   $messenger->addMessage(t('Backery Mails settings are available under <a href="@administer-page">Administer > Site configuration > Backery Mails</a>', ['@administer-page' => $url->toString()]));
 }
+
+/**
+ * Add changed field.
+ */
+function backerymails_update_9001() {
+  $storage_definition = BaseFieldDefinition::create('changed')
+    ->setLabel(t('Changed'))
+    ->setDescription(t('The time that the entity was last edited.'))
+    ->setRevisionable(TRUE)
+    ->setTranslatable(TRUE);
+  \Drupal::entityDefinitionUpdateManager()
+    ->installFieldStorageDefinition('changed', 'backerymails_entity', 'backerymails', $storage_definition);
+}
+

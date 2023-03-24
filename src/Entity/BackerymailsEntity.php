@@ -177,6 +177,12 @@ class BackerymailsEntity extends ContentEntityBase implements BackerymailsEntity
       ->setLabel(t('Created'))
       ->setDescription(t('The time that the entity was created.'));
 
+    $fields['changed'] = BaseFieldDefinition::create('changed')
+      ->setLabel(t('Changed'))
+      ->setDescription(t('The time that the entity was last edited.'))
+      ->setRevisionable(TRUE)
+      ->setTranslatable(TRUE);
+
     return $fields;
   }
 

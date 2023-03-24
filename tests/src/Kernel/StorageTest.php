@@ -79,6 +79,7 @@ class StorageTest extends KernelTestBase {
     $email = $this->backerymailsStorage->loadMultiple();
     $this->assertCount(1, $email);
 
+    /** @var \Drupal\backerymails\Entity\BackerymailsEntity $email */
     $email = reset($email);
     $this->assertEquals('backerymails_test', $email->getModule());
     $this->assertEquals('test', $email->getModuleKey());
@@ -88,6 +89,11 @@ class StorageTest extends KernelTestBase {
     $this->assertEquals('en', $email->getLangcode());
     $this->assertEquals('foo', $email->getSubject());
     $this->assertEquals('["bar"]', $email->getBody());
+
+    $this->assertIsString($email->getCreatedTime());
+    $this->assertNotEmpty($email->getCreatedTime());
+    $this->assertIsString($email->getChangedTime());
+    $this->assertNotEmpty($email->getChangedTime());
   }
 
   /**
