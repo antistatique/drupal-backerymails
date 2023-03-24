@@ -142,40 +142,78 @@ class BackerymailsEntity extends ContentEntityBase implements BackerymailsEntity
 
     $fields['module'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Module'))
-      ->setDescription(t('The module that send the mail.'));
+      ->setDescription(t('The module that send the mail.'))
+      ->setDisplayOptions('view', [
+        'label' => 'visible',
+        'type' => 'string',
+      ]);
 
     $fields['module_key'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Key'))
-      ->setDescription(t('The key of the mail, concording to the module.'));
+      ->setDescription(t('The key of the mail, concording to the module.'))
+      ->setDisplayOptions('view', [
+        'label' => 'visible',
+        'type' => 'string',
+      ]);
 
     $fields['mail_from'] = BaseFieldDefinition::create('string')
       ->setLabel(t('From'))
-      ->setDescription(t('The sender of the mail.'));
+      ->setDescription(t('The sender of the mail.'))
+      ->setDisplayOptions('view', [
+        'label' => 'visible',
+        'type' => 'string',
+      ]);
 
     $fields['mail_to'] = BaseFieldDefinition::create('string')
       ->setLabel(t('To'))
-      ->setDescription(t('The recipient(s) of the mail.'));
+      ->setDescription(t('The recipient(s) of the mail.'))
+      ->setDisplayOptions('view', [
+        'label' => 'visible',
+        'type' => 'string',
+      ]);
 
     $fields['mail_reply_to'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Reply-to'))
-      ->setDescription(t('The reply-to(s) of the mail.'));
+      ->setDescription(t('The reply-to(s) of the mail.'))
+      ->setDisplayOptions('view', [
+        'label' => 'visible',
+        'type' => 'string',
+      ]);
 
     $fields['langcode'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Langcode'))
       ->setSetting('max_length', 12)
-      ->setDescription(t('The langcode of the mail.'));
+      ->setDescription(t('The langcode of the mail.'))
+      ->setDisplayOptions('view', [
+        'label' => 'visible',
+        'type' => 'string',
+      ]);
 
     $fields['subject'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Subject'))
-      ->setDescription(t('The subject of the mail.'));
+      ->setDescription(t('The subject of the mail.'))
+      ->setDisplayOptions('view', [
+        'label' => 'visible',
+        'type' => 'string',
+      ]);
 
     $fields['body'] = BaseFieldDefinition::create('text_long')
       ->setLabel(t('Body'))
-      ->setDescription(t('The body of the mail.'));
+      ->setDescription(t('The body of the mail.'))
+      ->setDisplayOptions('view', [
+        'label' => 'visible',
+        'type' => 'text_default',
+      ]);
 
     $fields['created'] = BaseFieldDefinition::create('created')
       ->setLabel(t('Created'))
       ->setDescription(t('The time that the entity was created.'));
+
+    $fields['changed'] = BaseFieldDefinition::create('changed')
+      ->setLabel(t('Changed'))
+      ->setDescription(t('The time that the entity was last edited.'))
+      ->setRevisionable(TRUE)
+      ->setTranslatable(TRUE);
 
     return $fields;
   }

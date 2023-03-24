@@ -32,5 +32,10 @@
   },
   "require": {
     "drupal/mailsystem": "~4.3"
+  },
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
   }
 }

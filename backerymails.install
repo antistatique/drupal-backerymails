@@ -5,6 +5,7 @@
  * Contains backerymails.install.
  */
 
+use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Url;
 
 /**
@@ -19,4 +20,78 @@ function backerymails_install() {
 
   $messenger = \Drupal::messenger();
   $messenger->addMessage(t('Backery Mails settings are available under <a href="@administer-page">Administer > Site configuration > Backery Mails</a>', ['@administer-page' => $url->toString()]));
+}
+
+/**
+ * Add changed field.
+ */
+function backerymails_update_9001() {
+  $storage_definition = BaseFieldDefinition::create('changed')
+    ->setLabel(t('Changed'))
+    ->setDescription(t('The time that the entity was last edited.'))
+    ->setRevisionable(TRUE)
+    ->setTranslatable(TRUE);
+  \Drupal::entityDefinitionUpdateManager()
+    ->installFieldStorageDefinition('changed', 'backerymails_entity', 'backerymails', $storage_definition);
+}
+
+/**
+ * Add fields display mode.
+ */
+function backerymails_update_9002() {
+  $field_module = \Drupal::entityDefinitionUpdateManager()->getFieldStorageDefinition('module', 'backerymails_entity');
+  $field_module->setDisplayOptions('view', [
+    'label' => 'visible',
+    'type' => 'string',
+  ]);
+  \Drupal::entityDefinitionUpdateManager()->updateFieldStorageDefinition($field_module);
+
+  $field_module_key = \Drupal::entityDefinitionUpdateManager()->getFieldStorageDefinition('module_key', 'backerymails_entity');
+  $field_module_key->setDisplayOptions('view', [
+    'label' => 'visible',
+    'type' => 'string',
+  ]);
+  \Drupal::entityDefinitionUpdateManager()->updateFieldStorageDefinition($field_module_key);
+
+  $field_mail_from = \Drupal::entityDefinitionUpdateManager()->getFieldStorageDefinition('mail_from', 'backerymails_entity');
+  $field_mail_from->setDisplayOptions('view', [
+    'label' => 'visible',
+    'type' => 'string',
+  ]);
+  \Drupal::entityDefinitionUpdateManager()->updateFieldStorageDefinition($field_mail_from);
+
+  $field_mail_to = \Drupal::entityDefinitionUpdateManager()->getFieldStorageDefinition('mail_to', 'backerymails_entity');
+  $field_mail_to->setDisplayOptions('view', [
+    'label' => 'visible',
+    'type' => 'string',
+  ]);
+  \Drupal::entityDefinitionUpdateManager()->updateFieldStorageDefinition($field_mail_to);
+
+  $field_mail_reply_to = \Drupal::entityDefinitionUpdateManager()->getFieldStorageDefinition('mail_reply_to', 'backerymails_entity');
+  $field_mail_reply_to->setDisplayOptions('view', [
+    'label' => 'visible',
+    'type' => 'string',
+  ]);
+  \Drupal::entityDefinitionUpdateManager()->updateFieldStorageDefinition($field_mail_reply_to);
+
+  $field_langcode = \Drupal::entityDefinitionUpdateManager()->getFieldStorageDefinition('langcode', 'backerymails_entity');
+  $field_langcode->setDisplayOptions('view', [
+    'label' => 'visible',
+    'type' => 'string',
+  ]);
+  \Drupal::entityDefinitionUpdateManager()->updateFieldStorageDefinition($field_langcode);
+
+  $field_subject = \Drupal::entityDefinitionUpdateManager()->getFieldStorageDefinition('subject', 'backerymails_entity');
+  $field_subject->setDisplayOptions('view', [
+    'label' => 'visible',
+    'type' => 'string',
+  ]);
+  \Drupal::entityDefinitionUpdateManager()->updateFieldStorageDefinition($field_subject);
+
+  $field_body = \Drupal::entityDefinitionUpdateManager()->getFieldStorageDefinition('body', 'backerymails_entity');
+  $field_body->setDisplayOptions('view', [
+    'label' => 'visible',
+    'type' => 'text_default',
+  ]);
+  \Drupal::entityDefinitionUpdateManager()->updateFieldStorageDefinition($field_body);
 }
