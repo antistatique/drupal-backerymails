@@ -38,7 +38,7 @@ function backerymails_update_9001() {
 /**
  * Add fields display mode.
  */
-function backerymails_update_9003() {
+function backerymails_update_9002() {
   $field_module = \Drupal::entityDefinitionUpdateManager()->getFieldStorageDefinition('module', 'backerymails_entity');
   $field_module->setDisplayOptions('view', [
     'label' => 'visible',
