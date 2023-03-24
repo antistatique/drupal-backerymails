@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - fix Backerymail entity canonical routing - Issue #3171878: Drupal\Core\Entity\EntityStorageException: Route "entity.backerymails_entity.canonical" does not exist
 
 ### Added
+- add Backerymail entity canonical page with fields
 - add Backerymail entity 'changed' field
 
 ## [3.0.0] - 2023-03-17

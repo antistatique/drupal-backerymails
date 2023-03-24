@@ -81,8 +81,6 @@ class UiPageTest extends BackerymailsTestBase {
    *
    * @ConfigEntityType on \Drupal\backerymails\Entity\BackerymailsEntity.
    * works.
-   *
-   * @group kevin
    */
   public function testCanonicalPage() {
     $backerymail = $this->container->get('entity_type.manager')->getStorage('backerymails_entity')
@@ -101,6 +99,16 @@ class UiPageTest extends BackerymailsTestBase {
     // Canonical page must works and return 200 for Admin logged-in user.
     $this->drupalGet("admin/config/backerymails/mails/{$backerymail->id()}");
     $this->assertSession()->statusCodeEquals(200);
+
+    // Ensure the canonical page display each fields.
+    $this->assertSession()->pageTextContains('backerymails.module');
+    $this->assertSession()->pageTextContains('backerymails.module_key');
+    $this->assertSession()->pageTextContains('backerymails.mail_from');
+    $this->assertSession()->pageTextContains('backerymails.mail_to');
+    $this->assertSession()->pageTextContains('backerymails.mail_reply_to');
+    $this->assertSession()->pageTextContains('Langcode');
+    $this->assertSession()->pageTextContains('backerymails.subject');
+    $this->assertSession()->pageTextContains('backerymails.body');
 
     // Ensure canonical access require to be logged-in.
     $this->drupalLogout();
