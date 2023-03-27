@@ -90,9 +90,15 @@ class StorageTest extends KernelTestBase {
     $this->assertEquals('foo', $email->getSubject());
     $this->assertEquals('["bar"]', $email->getBody());
 
-    $this->assertIsString($email->getCreatedTime());
+    if (version_compare(\Drupal::VERSION, '10.1', '>')) {
+      $this->assertIsInt($email->getCreatedTime());
+      $this->assertIsInt($email->getChangedTime());
+    } else {
+      $this->assertIsString($email->getCreatedTime());
+      $this->assertIsString($email->getChangedTime());
+    }
+    
     $this->assertNotEmpty($email->getCreatedTime());
-    $this->assertIsString($email->getChangedTime());
     $this->assertNotEmpty($email->getChangedTime());
   }
 
