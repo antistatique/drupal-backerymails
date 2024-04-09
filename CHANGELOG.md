@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - add Backerymail entity 'changed' field
 - add Drupal GitlabCI
 - add cpsell project words for Gitlab-CI
+- add phpstan.neon in order to ignore new static() errors
 
 ## [3.0.0] - 2023-03-17
 ### Removed
