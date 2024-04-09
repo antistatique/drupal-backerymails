@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - add Backerymail entity canonical page with fields
 - add Backerymail entity 'changed' field
 - add Drupal GitlabCI
+- add cpsell project words for Gitlab-CI
 
 ## [3.0.0] - 2023-03-17
 ### Removed
