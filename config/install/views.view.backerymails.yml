@@ -26,7 +26,7 @@ display:
           perm: 'administer backerymails'
       cache:
         type: tag
-        options: {  }
+        options: {}
       query:
         type: views_query
         options:
@@ -34,7 +34,7 @@ display:
           distinct: false
           replica: false
           query_comment: ''
-          query_tags: {  }
+          query_tags: {}
       exposed_form:
         type: basic
         options:
@@ -69,7 +69,7 @@ display:
       style:
         type: table
         options:
-          grouping: {  }
+          grouping: {}
           row_class: ''
           default_row_class: true
           override: true
@@ -210,7 +210,7 @@ display:
             thousand_separator: ''
             prefix_suffix: true
           group_column: value
-          group_columns: {  }
+          group_columns: {}
           group_rows: true
           delta_limit: 0
           delta_offset: 0
@@ -277,7 +277,7 @@ display:
             custom_date_format: ''
             timezone: ''
           group_column: value
-          group_columns: {  }
+          group_columns: {}
           group_rows: true
           delta_limit: 0
           delta_offset: 0
@@ -342,7 +342,7 @@ display:
           settings:
             link_to_entity: false
           group_column: value
-          group_columns: {  }
+          group_columns: {}
           group_rows: true
           delta_limit: 0
           delta_offset: 0
@@ -407,7 +407,7 @@ display:
           settings:
             link_to_entity: false
           group_column: value
-          group_columns: {  }
+          group_columns: {}
           group_rows: true
           delta_limit: 0
           delta_offset: 0
@@ -472,7 +472,7 @@ display:
           settings:
             link_to_entity: false
           group_column: value
-          group_columns: {  }
+          group_columns: {}
           group_rows: true
           delta_limit: 0
           delta_offset: 0
@@ -544,7 +544,7 @@ display:
           settings:
             link_to_entity: false
           group_column: value
-          group_columns: {  }
+          group_columns: {}
           group_rows: true
           delta_limit: 0
           delta_offset: 0
@@ -609,7 +609,7 @@ display:
           settings:
             link_to_entity: false
           group_column: value
-          group_columns: {  }
+          group_columns: {}
           group_rows: true
           delta_limit: 0
           delta_offset: 0
@@ -674,7 +674,7 @@ display:
           settings:
             link_to_entity: false
           group_column: value
-          group_columns: {  }
+          group_columns: {}
           group_rows: true
           delta_limit: 0
           delta_offset: 0
@@ -686,11 +686,11 @@ display:
           entity_type: backerymails_entity
           entity_field: subject
           plugin_id: field
-      filters: {  }
-      sorts: {  }
+      filters: {}
+      sorts: {}
       title: Mails
-      header: {  }
-      footer: {  }
+      header: {}
+      footer: {}
       empty:
         area_text_custom:
           id: area_text_custom
@@ -703,9 +703,9 @@ display:
           tokenize: false
           content: 'No content available.'
           plugin_id: text_custom
-      relationships: {  }
-      arguments: {  }
-      display_extenders: {  }
+      relationships: {}
+      arguments: {}
+      display_extenders: {}
     cache_metadata:
       max-age: 0
       contexts:
@@ -713,14 +713,14 @@ display:
         - 'languages:language_interface'
         - url.query_args
         - user.permissions
-      tags: {  }
+      tags: {}
   page_1:
     display_plugin: page
     id: page_1
     display_title: Page
     position: 1
     display_options:
-      display_extenders: {  }
+      display_extenders: {}
       path: admin/config/backerymails/mails
       menu:
         type: normal
@@ -738,4 +738,4 @@ display:
         - 'languages:language_interface'
         - url.query_args
         - user.permissions
-      tags: {  }
+      tags: {}

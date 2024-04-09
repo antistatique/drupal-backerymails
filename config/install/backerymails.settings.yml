@@ -3,6 +3,6 @@ reroute:
   status: FALSE
   recipients: ''
 excludes:
-  customs: { }
+  customs: {}
   sensitives:
     - user_password_reset

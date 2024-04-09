@@ -1,7 +1,6 @@
 version: '3.6'
 
 services:
-
   drupal:
     build: .
     depends_on:
