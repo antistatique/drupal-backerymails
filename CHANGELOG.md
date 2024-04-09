@@ -15,11 +15,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [3.0.0] - 2023-03-17
 ### Removed
 - drop support of drupal below 9.4.x
+- drop support of drupal below 9.5.x
 - remove tests condition to maintain compatibility below Drupal 9.2
 
 ### Added
 - add dependabot for Github Action dependency
 - add official support of drupal 9.5 & 10.0
+- add coverage Drupal 10.1
+- add coverage Drupal 10.2
 
 ### Changed
 - re-enable PHPUnit Symfony Deprecation notice
