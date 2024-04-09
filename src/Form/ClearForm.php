@@ -2,11 +2,11 @@
 
 namespace Drupal\backerymails\Form;
 
-use Drupal\Core\Form\ConfirmFormBase;
-use Drupal\Core\Url;
-use Drupal\Core\Form\FormStateInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Form\ConfirmFormBase;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Provides a form for clearing all the maillog entries.

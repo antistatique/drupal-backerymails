@@ -5,8 +5,8 @@
  * Legacy Drupal 7 code to implements hooks.
  */
 
-use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\backerymails\Entity\BackerymailsEntity;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 
 /**
  * Alter Drupal standard mail sender to trace the submission(s).

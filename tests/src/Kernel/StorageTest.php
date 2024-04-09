@@ -2,8 +2,8 @@
 
 namespace Drupal\Tests\backerymails\Kernel;
 
-use Drupal\KernelTests\KernelTestBase;
 use Drupal\Core\Test\AssertMailTrait;
+use Drupal\KernelTests\KernelTestBase;
 
 /**
  * @covers ::backerymails_mail_alter
@@ -92,8 +92,14 @@ class StorageTest extends KernelTestBase {
 
     $this->assertIsString($email->getCreatedTime());
     $this->assertNotEmpty($email->getCreatedTime());
-    $this->assertIsString($email->getChangedTime());
     $this->assertNotEmpty($email->getChangedTime());
+
+    if (version_compare(\Drupal::VERSION, '10.1', '>=')) {
+      $this->assertIsInt($email->getChangedTime());
+    }
+    else {
+      $this->assertIsString($email->getChangedTime());
+    }
   }
 
   /**
