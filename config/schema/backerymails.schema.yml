@@ -4,7 +4,7 @@ backerymails.settings:
   mapping:
     verbose:
       type: boolean
-      label: 'Display the e-mails on page'
+      label: 'Display the emails on page'
     reroute:
       type: mapping
       label: 'Rerouting'
@@ -26,6 +26,6 @@ backerymails.settings:
             type: string
         sensitives:
           type: sequence
-          label: 'Exclude sensitives e-mails'
+          label: 'Exclude sensitives emails'
           sequence:
             type: string

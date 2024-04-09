@@ -38,7 +38,7 @@ class SettingsForm extends ConfigFormBase {
 
     // Display a page description.
     $form['description'] = [
-      '#markup' => '<p>' . $this->t('This page allows you to configure settings which determines how e-mail messages are saved.') . '</p>',
+      '#markup' => '<p>' . $this->t('This page allows you to configure settings which determines how email messages are saved.') . '</p>',
     ];
 
     $form['settings'] = [
@@ -48,7 +48,7 @@ class SettingsForm extends ConfigFormBase {
 
     $form['settings']['verbose'] = [
       '#type' => 'checkbox',
-      '#title' => $this->t("Display the e-mails on page."),
+      '#title' => $this->t("Display the emails on page."),
       '#default_value' => $config->get('verbose'),
       '#description' => $this->t('If enabled, anonymous users with permissions will see any verbose output mail.'),
     ];
@@ -60,9 +60,9 @@ class SettingsForm extends ConfigFormBase {
 
     $form['excludes']['sensitives'] = [
       '#type' => 'checkbox',
-      '#title' => $this->t('Exclude sensitives e-mails.'),
+      '#title' => $this->t('Exclude sensitives emails.'),
       '#default_value' => !empty($config->get('excludes')['sensitives']),
-      '#description' => $this->t('Drupal send sensitives e-mails to user account such "forgotten password". Enabling this setting will result in excluding all sensitives e-mails to be saved.'),
+      '#description' => $this->t('Drupal send sensitives emails to user account such "forgotten password". Enabling this setting will result in excluding all sensitives emails to be saved.'),
     ];
 
     $form['excludes']['customs'] = [
@@ -129,10 +129,10 @@ class SettingsForm extends ConfigFormBase {
       $config->save();
 
       if (!empty($excludes['sensitives'])) {
-        $this->messenger()->addMessage($this->t('Drupal has been configured to exclude all user sensitives e-mails.'), 'status');
+        $this->messenger()->addMessage($this->t('Drupal has been configured to exclude all user sensitives emails.'), 'status');
       }
       else {
-        $this->messenger()->addMessage($this->t('Drupal has been configured to save all e-mails, even sensitives ones.'), 'warning');
+        $this->messenger()->addMessage($this->t('Drupal has been configured to save all emails, even sensitives ones.'), 'warning');
       }
     }
 
@@ -146,7 +146,7 @@ class SettingsForm extends ConfigFormBase {
       $config->save();
 
       if ($form_state->getValue('reroute')['status']) {
-        $this->messenger()->addMessage($this->t('Drupal has been configured to reroute all outgoing e-mails.'), 'warning');
+        $this->messenger()->addMessage($this->t('Drupal has been configured to reroute all outgoing emails.'), 'warning');
       }
     }
 
@@ -155,7 +155,7 @@ class SettingsForm extends ConfigFormBase {
       $config->save();
 
       if ($form_state->getValue('settings')['verbose']) {
-        $this->messenger()->addMessage($this->t('Drupal has been configured to display all outgoing e-mails.'), 'warning');
+        $this->messenger()->addMessage($this->t('Drupal has been configured to display all outgoing emails.'), 'warning');
       }
     }
   }

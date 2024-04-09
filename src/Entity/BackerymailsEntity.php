@@ -94,14 +94,14 @@ class BackerymailsEntity extends ContentEntityBase implements BackerymailsEntity
   }
 
   /**
-   * Get the recipient(s) of the e-mail.
+   * Get the recipient(s) of the email.
    */
   public function getTo() {
     return $this->get('mail_to')->value;
   }
 
   /**
-   * Get the reply-to of the e-mail.
+   * Get the reply-to of the email.
    */
   public function getReplyto() {
     return $this->get('mail_reply_to')->value;

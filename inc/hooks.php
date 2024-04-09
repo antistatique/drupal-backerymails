@@ -67,7 +67,7 @@ function backerymails_mail_alter(&$message) {
     $body = json_encode($body);
   }
 
-  // Display the e-mail if the verbose is enabled.
+  // Display the email if the verbose is enabled.
   if ($config->get('verbose') && \Drupal::currentUser()->hasPermission('administer site configuration')) {
     // Print the message.
     $header_output = print_r($message['headers'], TRUE);

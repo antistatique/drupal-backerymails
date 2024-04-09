@@ -7,6 +7,6 @@ backerymails.config:
 backerymails.settings:
   title: 'Settings'
   route_name: backerymails.settings
-  description: 'Configure how Backery Mails will save e-mails.'
+  description: 'Configure how Backery Mails will save emails.'
   parent: backerymails.config
   weight: 100
