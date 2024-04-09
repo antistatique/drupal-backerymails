@@ -2,8 +2,8 @@
 
 namespace Drupal\Tests\backerymails\Kernel;
 
-use Drupal\KernelTests\KernelTestBase;
 use Drupal\Core\Test\AssertMailTrait;
+use Drupal\KernelTests\KernelTestBase;
 
 /**
  * @covers ::backerymails_mail_alter
